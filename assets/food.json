@@ -1,0 +1,53 @@
+[
+    {
+        "name" : "moutarde",
+        "heat" : 3,
+        "moistness" : -3
+
+    },
+    {
+        "name" : "poisson frais",
+        "heat" : 3,
+        "moistness" : -3
+    },
+    {
+        "name" : "poireau",
+        "heat" : 3,
+        "moistness" : -2
+    },
+    {
+        "name" : "canard",
+        "heat" : 3,
+        "moistness" : 2
+    },
+    {
+        "name" : "olive",
+        "heat" : 0,
+        "moistness" : -1
+    },
+    {
+        "name" : "eau",
+        "heat" : -4,
+        "moistness" : 4
+    },
+    {
+        "name" : "abricot",
+        "heat" : 2,
+        "moistness" : 3
+    },
+    {
+        "name" : "riz",
+        "heat" : -2,
+        "moistness" : -3
+    },
+    {
+        "name" : "lait",
+        "heat" : 0,
+        "moistness" : 0
+    },
+    {
+        "name" : "épeautre",
+        "heat" : 0,
+        "moistness" : 0
+    }
+]
