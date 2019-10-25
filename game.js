@@ -1,11 +1,11 @@
-console.clear();
+//console.clear();
 
 var config = {
     type: Phaser.AUTO,
     width: 600,
     height: 600,
     backgroundColor: '#FFFFFF',
-    // parent: 'phaser-example',
+    parent: 'phaser-example',
     physics: {
         default: 'matter'
     },
