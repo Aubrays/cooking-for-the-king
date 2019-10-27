@@ -1,9 +1,12 @@
+console.log('coucou')
+
 //console.clear();
 
-var config = {
-    type: Phaser.AUTO,
+const config = {
+    
     width: 600,
     height: 600,
+    type: Phaser.AUTO,
     backgroundColor: '#FFFFFF',
     parent: 'phaser-example',
     physics: {
@@ -33,4 +36,8 @@ function create ()
     // this.matter.add.pointerConstraint({ length: 1, stiffness: 0.6 });
 
     this.matter.add.mouseSpring({ length: 1, stiffness: 0.5 });
-}
+    
+
+function update(){
+
+}*/
