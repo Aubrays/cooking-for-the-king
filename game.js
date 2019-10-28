@@ -21,14 +21,16 @@ function preload ()
     this.load.image('leek', 'assets/sprites/leek.png');
     this.load.image('cauldron', 'assets/sprites/cauldron2.png');
     this.load.image('shelf', 'assets/sprites/shelf.png');
-
+    this.load.image('char', 'assets/sprites/chars/char1/char_1.png');
 }
+
 
 function create ()
 {
     this.add.image(300,400, 'background');
     this.add.image(450, 725, 'cauldron');
     this.add.image(100, 550, 'shelf');
+    this.add.image(230, 7, 'char').setOrigin(0,0);
     this.matter.world.setBounds();
 
     this.matter.add.image(100, 400, 'leek', null, { chamfer: 16 }).setBounce(0.5);
