@@ -21,7 +21,7 @@ function preload ()
     this.load.image('leek', 'assets/sprites/leek.png');
     this.load.image('cauldron', 'assets/sprites/cauldron2.png');
     this.load.image('shelf', 'assets/sprites/shelf.png');
-    this.load.image('char', 'assets/sprites/chars/char2/char_2.png');
+    this.load.image('char', 'assets/chars/char2/char_2.png');
 }
 
 
