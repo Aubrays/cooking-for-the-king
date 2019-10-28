@@ -1,7 +1,3 @@
-console.log('coucou')
-
-//console.clear();
-
 const config = {
     
     width: 600,
@@ -36,8 +32,4 @@ function create ()
     // this.matter.add.pointerConstraint({ length: 1, stiffness: 0.6 });
 
     this.matter.add.mouseSpring({ length: 1, stiffness: 0.5 });
-    
-
-function update(){
-
-}*/
+}
