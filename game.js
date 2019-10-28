@@ -1,10 +1,9 @@
 const config = {
-    
+    // Fixed size. TODO : responsive
     width: 600,
-    height: 600,
+    height: 800,
     type: Phaser.AUTO,
-    backgroundColor: '#FFFFFF',
-    parent: 'phaser-example',
+    backgroundColor: '#444444',
     physics: {
         default: 'matter'
     },
@@ -18,11 +17,18 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
+    this.load.image('background', 'assets/sprites/background.jpg');
     this.load.image('leek', 'assets/sprites/leek.png');
+    this.load.image('cauldron', 'assets/sprites/cauldron2.png');
+    this.load.image('shelf', 'assets/sprites/shelf.png');
+
 }
 
 function create ()
 {
+    this.add.image(300,400, 'background');
+    this.add.image(450, 725, 'cauldron');
+    this.add.image(100, 550, 'shelf');
     this.matter.world.setBounds();
 
     this.matter.add.image(100, 400, 'leek', null, { chamfer: 16 }).setBounce(0.5);
