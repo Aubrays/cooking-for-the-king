@@ -5,7 +5,7 @@ const config = {
     type: Phaser.AUTO,
     backgroundColor: '#444444',
     physics: {
-        default: 'matter'
+        default: 'matter',
     },
     scene: {
         preload: preload,
@@ -28,16 +28,62 @@ function preload ()
 function create ()
 {
     this.add.image(300,400, 'background');
-    this.add.image(450, 725, 'cauldron');
     this.add.image(100, 550, 'shelf');
     this.add.image(230, 7, 'char').setOrigin(0,0);
     this.matter.world.setBounds();
 
-    this.matter.add.image(100, 400, 'leek', null, { chamfer: 16 }).setBounce(0.5);
+    var chauderon = this.matter.add.image(450, 725, 'cauldron', null, {isStatic: true, label: 'cauldron'});
 
-    //  These both do the same thing:
-
-    // this.matter.add.pointerConstraint({ length: 1, stiffness: 0.6 });
+    var leek = this.matter.add.image(100, 400, 'leek', null, { chamfer: 16, label: 'food' }).setBounce(0);
 
     this.matter.add.mouseSpring({ length: 1, stiffness: 0.5 });
+
+    /* chauderon.setInteractive(new Phaser.Geom.Ellipse(160, 53, 150, 17), Phaser.Geom.Ellipse.Contains);
+    this.input.on('gameobjectover', function (pointer, gameObject) {
+
+        gameObject.setTint(0x7878ff);
+
+    });
+
+    this.input.on('gameobjectout', function (pointer, gameObject) {
+
+        gameObject.clearTint();
+
+    });  */
+
+    
+    //evenement collision
+    this.matter.world.on('collisionstart', function (event) {
+        
+        //detecte les objects qui entre en collision et si un object nourriture touche
+        //le chauderon, il est détruit et disparait
+        var bodyA = getRootBody(event.pairs[0].bodyA);
+        var bodyB = getRootBody(event.pairs[0].bodyB);
+
+        if ((bodyA.label === 'food' && bodyB.label === 'cauldron') ||
+            (bodyB.label === 'food' && bodyA.label === 'cauldron'))
+            {
+                var foodBody = bodyA.label === 'food' ? bodyA : bodyB;
+                var food = foodBody.gameObject;                    
+                this.matter.world.remove(foodBody);
+    
+                this.tweens.add({
+                    targets: food,
+                    alpha: { value: 0, duration: 150, ease: 'Power1' },
+                    onComplete: function (food) { food.destroy(); }.bind(this, food)
+                });
+            }
+
+    }, this);
+
+    function getRootBody (body)
+    {
+        if (body.parent === body) { return body; }
+        while (body.parent !== body)
+        {
+            body = body.parent;
+        }
+        return body;
+    }
+
 }
