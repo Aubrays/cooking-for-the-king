@@ -20,6 +20,7 @@ function preload ()
     this.load.image('background', 'assets/sprites/background.jpg');
     this.load.image('leek', 'assets/sprites/leek.png');
     this.load.image('cauldron', 'assets/sprites/cauldron2.png');
+    this.load.image('cauldronHit', 'assets/sprites/cauldronHit.png');
     this.load.image('shelf', 'assets/sprites/shelf.png');
     this.load.image('char', 'assets/chars/char2/char_2.png');
 }
@@ -29,14 +30,17 @@ function create ()
 {
     this.add.image(300,400, 'background');
     this.add.image(100, 550, 'shelf');
+    this.add.image(450, 725, 'cauldron');
     this.add.image(230, 7, 'char').setOrigin(0,0);
     this.matter.world.setBounds();
 
-    var chauderon = this.matter.add.image(450, 725, 'cauldron', null, {isStatic: true, label: 'cauldron'});
+    var chauderon = this.matter.add.image(458, 628, 'cauldronHit', null, {isStatic: true, label: 'cauldron'});
 
     var leek = this.matter.add.image(100, 400, 'leek', null, { chamfer: 16, label: 'food' }).setBounce(0);
 
     this.matter.add.mouseSpring({ length: 1, stiffness: 0.5 });
+
+    
 
     /* chauderon.setInteractive(new Phaser.Geom.Ellipse(160, 53, 150, 17), Phaser.Geom.Ellipse.Contains);
     this.input.on('gameobjectover', function (pointer, gameObject) {
