@@ -9,25 +9,41 @@ const config = {
     },
     scene: {
         preload: preload,
-        create: create
+        create: create,
+        update: update,
     }
 };
 
 var game = new Phaser.Game(config);
 
+// Cette fonction sert à charger les "assets" du jeu 
 function preload ()
 {
-    this.load.image('background', 'assets/sprites/background.jpg');
-    this.load.image('leek', 'assets/sprites/leek.png');
-    this.load.image('cauldron', 'assets/sprites/cauldron2.png');
-    this.load.image('cauldronHit', 'assets/sprites/cauldronHit.png');
-    this.load.image('shelf', 'assets/sprites/shelf.png');
-    this.load.image('char', 'assets/chars/char2/char_2.png');
+    // On ajoute le chemin global "assets" afin d'éviter de le retaper 150x
+    this.load.path = 'assets/';
+
+    // il n'y a plus besoin de mettre "assets" dans le chemin du fichier
+    this.load.image('background', 'sprites/background.jpg');
+    this.load.image('leek', 'sprites/leek.png');
+    this.load.image('cauldron', 'sprites/cauldron2.png');
+    this.load.image('cauldronHit', 'sprites/cauldronHit.png');
+    this.load.image('shelf', 'sprites/shelf.png');
+    this.load.image('char', 'chars/char2/char_2.png');
+
+    // Atlas generated with: https://gammafp.github.io/atlas-packer-phaser/
+    // nom de l'atlas (libre), chemin vers fichier de sprites, chemin vers l'atlas des sprites
+    this.load.atlas('foods', 'sprites/food.png', 'sprites/foods_atlas.json');
 }
 
 
 function create ()
 {
+    // Création d'un container pour ranger les assets "nourriture" animés
+    this.food = {};
+
+    // Test: on regarde si l'atlas fonctionne en chargeant le 2e élément de la première ligne des sprites
+    var patate = this.add.sprite(0,200, 'foods', 'food_1');
+
     this.add.image(300,400, 'background');
     this.add.image(100, 550, 'shelf');
     this.add.image(450, 725, 'cauldron');
@@ -36,7 +52,11 @@ function create ()
 
     var chauderon = this.matter.add.image(458, 628, 'cauldronHit', null, {isStatic: true, label: 'cauldron'});
 
-    var leek = this.matter.add.image(100, 400, 'leek', null, { chamfer: 16, label: 'food' }).setBounce(0);
+    // on crée un poireau aux coordonnées 450:400 (au lieu de 100:400)
+    this.food.leek = this.matter.add.image(450, 400, 'leek', null, { chamfer: 16, label: 'food' }).setBounce(0);
+    // on ajoute une sorte de patate en plus dans l'étagère. 
+    // Fixme: enlever l'animation
+    this.food.patate = this.matter.add.sprite(100, 170, 'foods', 'food_1');
 
     this.matter.add.mouseSpring({ length: 1, stiffness: 0.5 });
 
@@ -90,4 +110,13 @@ function create ()
         return body;
     }
 
+}
+
+// todo:
+/*
+Cette fonction est appelée 60 fois par seconde (optimalement), qui correspond à 60 FPS (animation fluide)
+*/
+function update() {
+    // on fait tourner le poireau de .5 degrés à chaque update
+    this.food.leek.rotation += 0.05;
 }
