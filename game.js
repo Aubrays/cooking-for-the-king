@@ -140,7 +140,7 @@ function compare(){
     // a function to get the food list
     async function getFoodList () {
         try {
-          const resp = await fetchJSON(food_path, food_name).getData()
+          const resp = await fetchJSON(food_path, food_name)
           console.log(resp)
           return resp
         }
