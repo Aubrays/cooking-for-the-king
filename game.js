@@ -28,11 +28,13 @@ function preload ()
     this.load.image('cauldron', 'sprites/cauldron2.png');
     this.load.image('cauldronHit', 'sprites/cauldronHit.png');
     this.load.image('shelf', 'sprites/shelf.png');
-    this.load.image('char', 'chars/char2/char_2.png');
+    this.load.image('char', 'chars/char1/char_1.png');
 
     // Atlas generated with: https://gammafp.github.io/atlas-packer-phaser/
     // nom de l'atlas (libre), chemin vers fichier de sprites, chemin vers l'atlas des sprites
     this.load.atlas('foods', 'sprites/food.png', 'sprites/foods_atlas.json');
+
+
 }
 
 
@@ -75,7 +77,6 @@ function create ()
 
     });  */
 
-    
     //evenement collision
     this.matter.world.on('collisionstart', function (event) {
         
@@ -111,12 +112,52 @@ function create ()
     }
 
 }
+function compare(){
+    let food_path = "/assets/food.json"
+    let food_name = "food"
+    let char_path = "/assets/chars/stats.json"
+    let char_name = "characters"
+    // one function to get JSON from a file and use it as an array
+    // the structure of the data in stats.json and food.json allows this.
+    // if any further data is to be added, it must follow a strictly identical structure.
 
+    async function fetchJSON(path, name){
+        let result = new Array()
+        const myRequest = new Request(path)
+        fetch(myRequest)
+        .then(response => response.json())
+        .then(data =>{
+            for (const product of data[name]){
+                result.push(product)
+                }
+            console.log(result)
+            return result
+            }
+        )
+    }
+
+    // ISSUE: this async function isn't awaiting, keeps returning a promise before it's resolved.
+    // a function to get the food list
+    async function getFoodList () {
+        try {
+          const resp = await fetchJSON(food_path, food_name).getData()
+          console.log(resp)
+          return resp
+        }
+        catch (err) {
+             console.log(err)
+          }
+    }
+    console.log(getFoodList())
+}
+
+compare()
 // todo:
 /*
 Cette fonction est appelée 60 fois par seconde (optimalement), qui correspond à 60 FPS (animation fluide)
 */
 function update() {
     // on fait tourner le poireau de .5 degrés à chaque update
-    this.food.leek.rotation += 0.05;
+    // en commentaire car pas fonctionnel.
+    //this.food.leek.rotation += 0.05;
 }
