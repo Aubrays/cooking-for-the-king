@@ -112,6 +112,7 @@ function create ()
     }
 
 }
+// fonction de comparaison entre les stats d'un perso et ceux de la nourriture.
 function compare(){
     let food_path = "/assets/food.json"
     let food_name = "food"
@@ -123,30 +124,27 @@ function compare(){
 
     async function fetchJSON(path, name){
         let result = new Array()
-        const myRequest = new Request(path)
-        fetch(myRequest)
-        .then(response => response.json())
-        .then(data =>{
-            for (const product of data[name]){
-                result.push(product)
+            let promise = new Promise(function(resolve, reject){
+            const myRequest = new Request(path)
+            fetch(myRequest)
+            .then(response => response.json())
+            .then(data =>{
+                for (const product of data[name]){
+                    result.push(product)
+                    }
+                resolve(result)
                 }
-            console.log(result)
-            return result
-            }
+            )}
         )
+        return promise
     }
 
     // ISSUE: this async function isn't awaiting, keeps returning a promise before it's resolved.
     // a function to get the food list
     async function getFoodList () {
-        try {
-          const resp = await fetchJSON(food_path, food_name)
-          console.log(resp)
-          return resp
-        }
-        catch (err) {
-             console.log(err)
-          }
+        let resp = await fetchJSON(food_path, food_name)
+        console.log(resp)
+        return resp
     }
     console.log(getFoodList())
 }
