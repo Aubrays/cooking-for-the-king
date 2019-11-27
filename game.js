@@ -32,6 +32,7 @@ function preload ()
 
     // Atlas generated with: https://gammafp.github.io/atlas-packer-phaser/
     // nom de l'atlas (libre), chemin vers fichier de sprites, chemin vers l'atlas des sprites
+    // TODO : Generate a new atlas with this tool : http://free-tex-packer.com/
     this.load.atlas('foods', 'sprites/food.png', 'sprites/foods_atlas.json');
 
 
