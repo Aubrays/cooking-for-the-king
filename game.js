@@ -142,11 +142,17 @@ function compare(){
     // ISSUE: this async function isn't awaiting, keeps returning a promise before it's resolved.
     // a function to get the food list
     async function getFoodList () {
-        let resp = await fetchJSON(food_path, food_name)
-        console.log(resp)
-        return resp
+        try{
+            return await(fetchJSON(food_path, food_name))
+        }
+        catch(e) {
+            console.error(e)
+        }
+
     }
-    console.log(getFoodList())
+    //setTimeout(console.log(getFoodList()),5000)
+    food_list = getFoodList()
+    console.log(food_list)
 }
 
 compare()
