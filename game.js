@@ -128,7 +128,7 @@ function compare(){
             let promise = new Promise(function(resolve, reject){
             const myRequest = new Request(path)
             fetch(myRequest)
-            .then(response => await response.json())
+            .then(response => response.json())
             .then(data =>{
                 for (const product of data[name]){
                     result.push(product)
@@ -142,11 +142,24 @@ function compare(){
 
     // ISSUE: how to get PromiseValue?
     async function getFoodList () {
-        let resp = await fetchJSON(food_path, food_name)
-        console.log(resp)
-        return resp
+        let food = await fetchJSON(food_path, food_name)
+        return food
     }
-    getFoodList()
+    async function getCharList(){
+        let chars = await fetchJSON(char_path, char_name)
+        return chars
+    }
+    function getLists(){
+        foodlist = getFoodList().then(function(food){
+            console.log(food)
+            return food
+        })
+        charlist = getCharList().then(function(char){
+            console.log(char)
+            return char
+        })
+        
+    }
 }
 
 compare()
