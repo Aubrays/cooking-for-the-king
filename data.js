@@ -272,8 +272,11 @@ let characters = {
 console.log(characters.characters[2])
 //returns a character object with updated stats
 function compare(food_item,char){
+    // new "heat" stat will be the sum of the existing stat and the food modifier.
     heat_res = char.stats.heat + food_item.heat
+    // the same applies for moistness.
     moist_res = char.stats.moistness + food_item.moistness
+    // return a character object with modified stats.
     return {"name": char.name,
             "path": char.path,
             stats:{
@@ -281,5 +284,6 @@ function compare(food_item,char){
                 "moistness":moist_res}
     }
 }
+// log to test
 console.log(compare(food.food[0], characters.characters[2]))
   

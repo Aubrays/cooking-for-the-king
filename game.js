@@ -16,13 +16,13 @@ const config = {
 
 var game = new Phaser.Game(config);
 
-// Cette fonction sert à charger les "assets" du jeu 
+// This function loads game assets.
 function preload ()
 {
-    // On ajoute le chemin global "assets" afin d'éviter de le retaper 150x
+    // add a global path "assets" to avoid repetition.
     this.load.path = 'assets/';
 
-    // il n'y a plus besoin de mettre "assets" dans le chemin du fichier
+    // starting here, we no longer need to add "assets" in the file path.
     this.load.image('background', 'sprites/background.jpg');
     this.load.image('leek', 'sprites/leek.png');
     this.load.image('cauldron', 'sprites/cauldron2.png');
@@ -31,7 +31,7 @@ function preload ()
     this.load.image('char', 'chars/char1/char_1.png');
 
     // Atlas generated with: https://gammafp.github.io/atlas-packer-phaser/
-    // nom de l'atlas (libre), chemin vers fichier de sprites, chemin vers l'atlas des sprites
+    // atlas name (we decide), path for sprite file, path for sprite atlas.
     // TODO : Generate a new atlas with this tool : http://free-tex-packer.com/
     this.load.atlas('foods', 'sprites/food.png', 'sprites/foods_atlas.json');
 
@@ -41,10 +41,10 @@ function preload ()
 
 function create ()
 {
-    // Création d'un container pour ranger les assets "nourriture" animés
+    // Create a container to store the animated "food" assets.
     this.food = {};
 
-    // Test: on regarde si l'atlas fonctionne en chargeant le 2e élément de la première ligne des sprites
+    // Test: see if the atlas is functional by loading the second part of the first line of the sprites.
     var patate = this.add.sprite(0,200, 'foods', 'food_1');
 
     this.add.image(300,400, 'background');
@@ -55,12 +55,15 @@ function create ()
 
     var chauderon = this.matter.add.image(458, 628, 'cauldronHit', null, {isStatic: true, label: 'cauldron'});
 
-    // on crée un poireau aux coordonnées 450:400 (au lieu de 100:400)
+    // create a leek at 450,400 rather than 100,400
+    // what does chamfer do?
     this.food.leek = this.matter.add.image(450, 400, 'leek', null, { chamfer: 16, label: 'food' }).setBounce(0);
-    // on ajoute une sorte de patate en plus dans l'étagère. 
-    // Fixme: enlever l'animation
+    // also add a kind of potato on the shelf
+    // TODO: check if we're actually allowed potatoes? historical accuracy.
+    // TODO: remove animation.
     this.food.patate = this.matter.add.sprite(100, 170, 'foods', 'food_1');
 
+    // TODO: comment this? what is mouseSpring. not super important.
     this.matter.add.mouseSpring({ length: 1, stiffness: 0.5 });
 
     
@@ -102,6 +105,7 @@ function create ()
 
     }, this);
 
+    //TODO: comment this, what does it do?
     function getRootBody (body)
     {
         if (body.parent === body) { return body; }
@@ -113,62 +117,13 @@ function create ()
     }
 
 }
-// fonction de comparaison entre les stats d'un perso et ceux de la nourriture.
-function compare(){
-    let food_path = "/assets/food.json"
-    let food_name = "food"
-    let char_path = "/assets/chars/stats.json"
-    let char_name = "characters"
-    // one function to get JSON from a file and use it as an array
-    // the structure of the data in stats.json and food.json allows this.
-    // if any further data is to be added, it must follow a strictly identical structure.
 
-    async function fetchJSON(path, name){
-        let result = new Array()
-            let promise = new Promise(function(resolve, reject){
-            const myRequest = new Request(path)
-            fetch(myRequest)
-            .then(response => response.json())
-            .then(data =>{
-                for (const product of data[name]){
-                    result.push(product)
-                    }
-                resolve(result)
-                }
-            )}
-        )
-        return promise
-    }
-
-    // ISSUE: how to get PromiseValue?
-    async function getFoodList () {
-        let food = await fetchJSON(food_path, food_name)
-        return food
-    }
-    async function getCharList(){
-        let chars = await fetchJSON(char_path, char_name)
-        return chars
-    }
-    function getLists(){
-        foodlist = getFoodList().then(function(food){
-            console.log(food)
-            return food
-        })
-        charlist = getCharList().then(function(char){
-            console.log(char)
-            return char
-        })
-        
-    }
-}
-
-compare()
 // todo:
 /*
-Cette fonction est appelée 60 fois par seconde (optimalement), qui correspond à 60 FPS (animation fluide)
+This function is called 60x per second (optimally), which should give a fluid, 60FPS animation.
 */
 function update() {
-    // on fait tourner le poireau de .5 degrés à chaque update
-    // en commentaire car pas fonctionnel.
+    // the leek turns 0.5 degrees each update.
+    // put as a comment because it isn't functionnal and throws errors.
     //this.food.leek.rotation += 0.05;
 }
