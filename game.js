@@ -128,7 +128,7 @@ function compare(){
             let promise = new Promise(function(resolve, reject){
             const myRequest = new Request(path)
             fetch(myRequest)
-            .then(response => response.json())
+            .then(response => await response.json())
             .then(data =>{
                 for (const product of data[name]){
                     result.push(product)
@@ -140,14 +140,13 @@ function compare(){
         return promise
     }
 
-    // ISSUE: this async function isn't awaiting, keeps returning a promise before it's resolved.
-    // a function to get the food list
+    // ISSUE: how to get PromiseValue?
     async function getFoodList () {
         let resp = await fetchJSON(food_path, food_name)
         console.log(resp)
         return resp
     }
-    console.log(getFoodList())
+    getFoodList()
 }
 
 compare()
