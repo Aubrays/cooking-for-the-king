@@ -1,9 +1,6 @@
 # A game with Phaser.js
 
-## Installation
-
-Clone the repository. Run a development server in the directory, like the PHP or the Python server :
-`python -m http.server 8000` and visit this local address : `http://localhost:8000`.
+To write...
 
 ## Context of the creation
 
