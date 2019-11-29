@@ -28,8 +28,8 @@ let characters = {
           }
       }
     ]
-  }
-  let food = {
+}
+let food = {
     food: [
       {
         name: 'moutarde',
@@ -267,7 +267,7 @@ let characters = {
         moistness: -3
       }
     ]
-  }
+}
 
 console.log(characters.characters[2])
 //returns a character object with updated stats
@@ -277,11 +277,13 @@ function compare(food_item,char){
     // the same applies for moistness.
     moist_res = char.stats.moistness + food_item.moistness
     // return a character object with modified stats.
-    return {"name": char.name,
-            "path": char.path,
-            stats:{
-                "heat": heat_res,
-                "moistness":moist_res}
+    return {
+      "name": char.name,
+      "path": char.path,
+      stats: {
+        "heat": heat_res,
+        "moistness":moist_res
+      }
     }
 }
 // log to test

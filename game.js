@@ -45,7 +45,7 @@ function create ()
     this.food = {};
 
     // Test: see if the atlas is functional by loading the second part of the first line of the sprites.
-    var patate = this.add.sprite(0,200, 'foods', 'food_1');
+    var carrots = this.add.sprite(0,100, 'foods', 'food_5');
 
     this.add.image(300,400, 'background');
     this.add.image(100, 550, 'shelf');
@@ -56,12 +56,16 @@ function create ()
     var chauderon = this.matter.add.image(458, 628, 'cauldronHit', null, {isStatic: true, label: 'cauldron'});
 
     // create a leek at 450,400 rather than 100,400
-    // what does chamfer do?
+    // what does chamfer do? -> it's like a bezel
+    // .setBounce = how it "bounces" when collisionning
     this.food.leek = this.matter.add.image(450, 400, 'leek', null, { chamfer: 16, label: 'food' }).setBounce(0);
+
     // also add a kind of potato on the shelf
-    // TODO: check if we're actually allowed potatoes? historical accuracy.
     // TODO: remove animation.
-    this.food.patate = this.matter.add.sprite(100, 170, 'foods', 'food_1');
+    this.food.carrots = this.matter.add.sprite(430, 390, 'foods', 'food_5', { chamfer: 16, label: 'food' }).setBounce(0);
+
+    // todo: translate
+    this.food.panais = this.matter.add.sprite(80, 70, 'foods', 'food_7', { chamfer: 16, label: 'food' }).setBounce(.3);
 
     // TODO: comment this? what is mouseSpring. not super important.
     this.matter.add.mouseSpring({ length: 1, stiffness: 0.5 });
@@ -83,12 +87,17 @@ function create ()
 
     //evenement collision
     this.matter.world.on('collisionstart', function (event) {
+        console.log(event); // analyzing event object
         
         //detecte les objects qui entre en collision et si un object nourriture touche
         //le chauderon, il est détruit et disparait
         var bodyA = getRootBody(event.pairs[0].bodyA);
         var bodyB = getRootBody(event.pairs[0].bodyB);
 
+
+        /*
+        * When food hits the cauldron, we "remove it"
+        */
         if ((bodyA.label === 'food' && bodyB.label === 'cauldron') ||
             (bodyB.label === 'food' && bodyA.label === 'cauldron'))
             {
@@ -101,6 +110,15 @@ function create ()
                     alpha: { value: 0, duration: 150, ease: 'Power1' },
                     onComplete: function (food) { food.destroy(); }.bind(this, food)
                 });
+            }
+
+        /*
+         TODO: when the food hits the shelf, we want it to stop
+        */ 
+        if ((bodyA.label === 'food' && bodyB.label === 'shelf') ||
+            (bodyB.label === 'food' && bodyA.label === 'cauldron')) 
+            {
+                this.matter.world.isStatic = true; // nope, doesn't work
             }
 
     }, this);
