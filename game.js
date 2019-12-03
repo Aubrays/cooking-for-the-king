@@ -5,9 +5,9 @@ const config = {
     type: Phaser.AUTO,
     backgroundColor: '#444444',
     physics: {
-        default: 'matter',
+        default: 'arcade',
     },
     scene: [BootScene, PlayScene]
 };
 
-var game = new Phaser.Game(config);
+let game = new Phaser.Game(config);
