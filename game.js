@@ -6,6 +6,9 @@ const config = {
     backgroundColor: '#444444',
     physics: {
         default: 'arcade',
+        arcade: {
+            debug: true
+        }
     },
     scene: [BootScene, PlayScene]
 };

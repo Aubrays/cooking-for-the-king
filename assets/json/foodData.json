@@ -21,7 +21,8 @@
         "name" : "poireau",
         "heat" : 3,
         "moistness" : -2
-    },    {
+    },
+    {
         "name" : "fenouil",
         "heat" : 3,
         "moistness" : -2

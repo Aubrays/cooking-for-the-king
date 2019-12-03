@@ -1,0 +1,61 @@
+{
+	"textures": [
+		{
+			"image": "food_dev.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 20,
+				"h": 46
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "leek.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 35,
+						"h": 35
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 7,
+						"w": 18,
+						"h": 25
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 18,
+						"h": 25
+					}
+				},
+				{
+					"filename": "bread.png",
+					"rotated": true,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 24,
+						"h": 24
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 21,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 25,
+						"w": 21,
+						"h": 20
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "http://free-tex-packer.com",
+		"version": "0.6.0"
+	}
+}
