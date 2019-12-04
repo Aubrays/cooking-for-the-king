@@ -47,19 +47,9 @@ class PlayScene extends Phaser.Scene {
 
         this.physics.add.overlap(this.foods, this.cauldron, this.cauldronTouch, null, this);
 
-        // leek example
-        this.foods.add(this.leek);
-        this.input.setDraggable(this.leek);
-        this.dragFood(this.leek);
-
     }
 
     update() {
-        // Phaser.Actions.Call(this.foods.getChildren(), function(food) {
-        //     this.checkPos(food)
-        // }, this);
-
-        // this.checkPos(this.leek);
     }
 
     dragFood() {
@@ -88,3 +78,12 @@ class PlayScene extends Phaser.Scene {
         // move gauges
     }
 }
+
+
+// Get data
+// let data = this.cache.json.get('foodaData');
+
+// Set data to a sprite
+// gameObject.setData();
+// https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Sprite.html#setData__anchor
+
