@@ -1,4 +1,4 @@
-let characters = {
+const characters = {
     characters: [
       {
         name: 'Patrick',
@@ -28,8 +28,8 @@ let characters = {
           }
       }
     ]
-}
-let food = {
+  }
+  const food = {
     food: [
       {
         name: 'moutarde',

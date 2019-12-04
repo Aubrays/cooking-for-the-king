@@ -1,0 +1,14 @@
+{
+    "food" : [
+        {
+            "name" : "poireau",
+            "heat" : 3,
+            "moistness" : -2
+        },
+        {
+            "name" : "pain",
+            "heat" : 2,
+            "moistness" : 0
+        }
+    ]
+}
