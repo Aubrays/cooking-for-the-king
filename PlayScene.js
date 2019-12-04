@@ -81,7 +81,7 @@ class PlayScene extends Phaser.Scene {
 
 
 // Get data
-// let data = this.cache.json.get('foodaData');
+// let data = this.cache.json.get('foodData');
 
 // Set data to a sprite
 // gameObject.setData();
