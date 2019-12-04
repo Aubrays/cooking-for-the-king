@@ -23,7 +23,7 @@ class BootScene extends Phaser.Scene {
     }
 
     create() {
-        this.scene.start("playGame");
+        this.scene.start("menuGame");
     }
 
     update() {

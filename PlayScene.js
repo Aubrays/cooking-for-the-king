@@ -5,6 +5,10 @@ class PlayScene extends Phaser.Scene {
 
     create ()
     {
+        let foodData = this.cache.json.get('foodData');
+
+        console.log(foodData);
+
         // Declarations of images (decoration only)
         this.background = this.add.image(300, 400, 'background');
 
@@ -15,14 +19,22 @@ class PlayScene extends Phaser.Scene {
         this.cauldron.body.setSize(200, 20);
         this.cauldron.body.setOffset(60, 50);
 
+        // Manipulate the atlas data
+        let texturesFood = this.textures.get('foods');
+        let framesFood = texturesFood.getFrameNames();
 
-        this.leek = this.physics.add.sprite(100, 200, 'leek').setInteractive();
+        console.log(texturesFood.frames);
 
-        //Add physics for all foods
+        // Phaser.Actions.Call(texturesFood, function(){
+
+
+        // });
+
+        // Add physics for all foods ppresent in atlas file
         // Put sprite names in game
         this.foods = this.physics.add.group({
             key: 'foods',
-            frame: ["leek.png","bread.png"],
+            frame: framesFood,
             frameQuantity: 2,
             collideWorldBounds : true
         });

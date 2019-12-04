@@ -10,7 +10,7 @@
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "leek.png",
+					"filename": "leek",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -31,7 +31,7 @@
 					}
 				},
 				{
-					"filename": "bread.png",
+					"filename": "bread",
 					"rotated": true,
 					"trimmed": true,
 					"sourceSize": {
