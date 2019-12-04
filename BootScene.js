@@ -16,9 +16,7 @@ class BootScene extends Phaser.Scene {
 
         this.load.image('leek', 'sprites/leek.png');
 
-        // Atlas generated with: https://gammafp.github.io/atlas-packer-phaser/
-        // atlas name (we decide), path for sprite file, path for sprite atlas.
-        // TODO : Generate a new atlas with this tool : http://free-tex-packer.com/
+        // Atla generated with http://free-tex-packer.com/
         this.load.atlas('foods', 'sprites/food_dev.png', 'sprites/food_dev_atlas.json');
 
         this.load.json('foodData', 'json/foodData.json');

@@ -55,31 +55,30 @@ class PlayScene extends Phaser.Scene {
     }
 
     update() {
-        Phaser.Actions.Call(this.foods.getChildren(), function(food) {
-            this.checkPos(food)
-        }, this);
+        // Phaser.Actions.Call(this.foods.getChildren(), function(food) {
+        //     this.checkPos(food)
+        // }, this);
 
-        this.checkPos(this.leek);
+        // this.checkPos(this.leek);
     }
 
     dragFood() {
-        this.input.on('drag', function(pointer, gameObject, dragX, dragY){
-            gameObject.x = dragX;
-            gameObject.y = dragY;
+        this.input.on('drag', function(pointer, food, dragX, dragY){
+            food.x = dragX;
+            food.y = dragY;
         })
 
-        
-    }
-
-    checkPos(food) {
-
+        this.input.on('dragend', function(pointer, food){
         if(food.x < config.width/2) {
             return;
 
             // food.input.dragStartX vs food.x
         } else {
-            food.setGravity(0, 300);
+            food.setGravity(0, 4000);
         }
+        });
+
+        
     }
 
     cauldronTouch(cauldron, food) {

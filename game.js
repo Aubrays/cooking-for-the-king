@@ -1,3 +1,5 @@
+// File for config and global values
+
 const config = {
     // Fixed size. TODO : responsive
     width: 600,
