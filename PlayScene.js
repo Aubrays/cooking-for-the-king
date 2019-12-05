@@ -8,6 +8,10 @@ class PlayScene extends Phaser.Scene {
         // Declarations of images (decoration only)
         this.background = this.add.image(300, 400, 'background');
 
+        // Creation of the progress bars
+        let heatBar = this.createProgressbar(300, 50);
+        let moistBar = this.createProgressbar(300, 80);
+
         // Declarations of sprites (for physics)
 
         this.shelf = this.physics.add.sprite(100, 550, 'shelf');
@@ -76,6 +80,59 @@ class PlayScene extends Phaser.Scene {
         // add to the dish
         // write in the recipe
         // move gauges
+    }
+
+    createProgressbar (x, y)
+    {
+        // size & position
+        let width = 200;
+        let height = 15;
+        let xStart = x - width / 2;
+        let yStart = y - height / 2;
+
+        // border size
+        let borderOffset = 2;
+
+        let borderRect = new Phaser.Geom.Rectangle(
+            xStart - borderOffset,
+            yStart - borderOffset,
+            width + borderOffset * 2,
+            height + borderOffset * 2);
+
+        let border = this.add.graphics({
+            lineStyle: {
+                width: 2,
+                color: 0x000000
+            }
+        });
+        border.strokeRectShape(borderRect);
+
+        // test to see filled bar
+        let progressbar = this.add.graphics();
+        progressbar.fillStyle(0xffffff, 1);
+        progressbar.fillRect(xStart, yStart, 0.5 * width, height);
+
+        /** Need to link the food data in the cauldron to
+         * Update the progress bar.
+         * 
+         * @param {number} percentage 
+         */
+        /*let updateProgressbar = function (percentage)
+        {
+            progressbar.clear();
+            progressbar.fillStyle(0xffffff, 1);
+            progressbar.fillRect(xStart, yStart, percentage * width, height);
+        };
+
+        this.load.on('progress', updateProgressbar);
+
+        this.load.once('complete', function ()
+        {
+
+            this.load.off('progress', updateProgressbar);
+            this.scene.start('title');
+
+        }, this); */
     }
 }
 
