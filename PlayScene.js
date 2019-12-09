@@ -109,7 +109,9 @@ class PlayScene extends Phaser.Scene {
 
         // test to see filled bar
         let progressbar = this.add.graphics();
-        progressbar.fillStyle(0xffffff, 1);
+
+        var color = Phaser.Display.Color.GetColor(255, 255, 0);
+        progressbar.fillStyle(color, 1);
         progressbar.fillRect(xStart, yStart, 0.5 * width, height);
 
         /** Need to link the food data in the cauldron to
