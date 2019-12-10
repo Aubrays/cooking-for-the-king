@@ -5,9 +5,10 @@ class PlayScene extends Phaser.Scene {
 
     create ()
     {
-        let foodData = this.cache.json.get('foodData');
+        this.foodData = this.cache.json.get('foodData');
 
-        console.log(foodData);
+        let levelNumber = 1;
+        let levelName = 'level' + levelNumber.toString();
 
         // Declarations of images (decoration only)
         this.background = this.add.image(300, 400, 'background');
@@ -19,33 +20,14 @@ class PlayScene extends Phaser.Scene {
         this.cauldron.body.setSize(200, 20);
         this.cauldron.body.setOffset(60, 50);
 
-        // Manipulate the atlas data
-        let texturesFood = this.textures.get('foods');
-        let framesFood = texturesFood.getFrameNames();
+        this.foods = this.physics.add.group();
 
-        console.log(texturesFood.frames);
-
-        // Phaser.Actions.Call(texturesFood, function(){
-
-
-        // });
-
-        // Add physics for all foods ppresent in atlas file
-        // Put sprite names in game
-        this.foods = this.physics.add.group({
-            key: 'foods',
-            frame: framesFood,
-            frameQuantity: 2,
-            collideWorldBounds : true
-        });
-
-
-        Phaser.Actions.Call(this.foods.getChildren(), function(food) {
-            food.setInteractive({
-                draggable: true
-            });
+        // Generate foods for the level 1
+        Phaser.Actions.Call(level1.foods, function(food){
+            let new_food = new Food(this, "foods", food);
+            this.foods.add(new_food);
         }, this);
-
+        
         Phaser.Actions.GridAlign(this.foods.getChildren(), {
             width: 10,
             height: 10,
@@ -55,7 +37,7 @@ class PlayScene extends Phaser.Scene {
             y: 550
         });
 
-        this.dragFood(this.foods);
+        this.dragFood();
 
         this.physics.add.overlap(this.foods, this.cauldron, this.cauldronTouch, null, this);
 
@@ -85,6 +67,8 @@ class PlayScene extends Phaser.Scene {
 
     cauldronTouch(cauldron, food) {
         food.disableBody(true, true);
+        console.log(food.getData('name'));
+
         // add to the dish
         // write in the recipe
         // move gauges
