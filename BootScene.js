@@ -14,16 +14,16 @@ class BootScene extends Phaser.Scene {
         this.load.image('shelf', 'sprites/shelf.png');
         this.load.image('char', 'sprites/chars/char1/char_1.png');
 
-        this.load.image('leek', 'sprites/leek.png');
+        // this.load.image('leek', 'sprites/leek.png');
 
         // Atla generated with http://free-tex-packer.com/
         this.load.atlas('foods', 'sprites/food_dev.png', 'sprites/food_dev_atlas.json');
 
-        this.load.json('foodData', 'json/foodData.json');
+        this.load.json('foodData', 'json/foodData_dev.json');
     }
 
     create() {
-        this.scene.start("playGame");
+        this.scene.start("menuGame");
     }
 
     update() {

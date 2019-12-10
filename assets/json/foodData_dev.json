@@ -1,12 +1,12 @@
 {
-    "food" : [
+    "foods" : [
         {
-            "name" : "poireau",
+            "name" : "leek",
             "heat" : 3,
             "moistness" : -2
         },
         {
-            "name" : "pain",
+            "name" : "bread",
             "heat" : 2,
             "moistness" : 0
         }
