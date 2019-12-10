@@ -1,0 +1,20 @@
+{
+    "chars" : [
+        {
+            "name" : "Mélisende",
+            "heatStart" : -3,
+            "moistnessStart" : 2,
+            "heatEnd" : 0,
+            "moistnessEnd" : 0,
+            "wealth" : 10
+        },
+        {
+            "name" : "Charles",
+            "heatStart" : -2,
+            "moistnessStart" : -2,
+            "heatEnd" : 4,
+            "moistnessEnd" : 1,
+            "wealth" : 20
+        }
+    ]
+}

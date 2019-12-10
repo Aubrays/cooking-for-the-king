@@ -1,7 +1,16 @@
 const level1 = {
-    foods: [
+    foods : [
+        'leek'
+    ],
+    char : 'Mélisende'
+}
+
+const level2 = {
+    foods : [
         'leek', 
         'bread'
     ],
-    char : 'char1'
+    char : 'Charles'
 }
+
+const levels = [level1, level2];

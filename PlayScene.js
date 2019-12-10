@@ -3,22 +3,34 @@ class PlayScene extends Phaser.Scene {
         super("playGame");
     }
 
+    init(props)
+    {
+        const { level = 0 } = props
+        this.currentLevel = level;
+    }
+
     create ()
     {
-        this.foodData = this.cache.json.get('foodData');
+        console.log(this.currentLevel);
 
-        let levelNumber = 1;
-        let levelName = 'level' + levelNumber.toString();
+        let levelName = 'level' + this.currentLevel.toString();
+
+        let levelData = levels[this.currentLevel];
+        console.log(levelData);
+
+
+        // Declarations of data
+        this.foodData = this.cache.json.get('foodData');
+        this.charData = this.cache.json.get('charData');
 
         // Declarations of images (decoration only)
         this.background = this.add.image(300, 400, 'background');
 
         // Creation of the progress bars
-        let heatBar = this.createProgressbar(300, 50);
-        let moistBar = this.createProgressbar(300, 80);
+        let heatBar = this.createProgressbar(150, 50);
+        let moistBar = this.createProgressbar(150, 80);
 
         // Declarations of sprites (for physics)
-
         this.shelf = this.physics.add.sprite(100, 550, 'shelf');
         this.cauldron = this.physics.add.sprite(450, 725, 'cauldron');
         this.cauldron.body.setSize(200, 20);
@@ -27,11 +39,11 @@ class PlayScene extends Phaser.Scene {
         this.foods = this.physics.add.group();
 
         // Generate foods for the level 1
-        Phaser.Actions.Call(level1.foods, function(food){
+        Phaser.Actions.Call(levelData.foods, function(food){
             let new_food = new Food(this, "foods", food);
             this.foods.add(new_food);
         }, this);
-        
+
         Phaser.Actions.GridAlign(this.foods.getChildren(), {
             width: 10,
             height: 10,
@@ -42,6 +54,15 @@ class PlayScene extends Phaser.Scene {
         });
 
         this.dragFood();
+
+        this.char1 = new Character(this, levelData.char); // now just texture, not frame
+
+        this.dish = {
+            foods : [],
+            heat : 0,
+            moistness : 0,
+            cost : 0
+        }
 
         this.physics.add.overlap(this.foods, this.cauldron, this.cauldronTouch, null, this);
 
@@ -74,12 +95,27 @@ class PlayScene extends Phaser.Scene {
         console.log(food.getData('name'));
 
         // add to the dish
+
+        this.dish.foods.push(food.data.values.name);
+        this.dish.moistness += food.data.values.moistness;
+        this.dish.heat += food.data.values.heat;
+        this.dish.cost += food.data.values.price;
+
+
         // write in the recipe
         // move gauges
+
+        this.checkVictory();
     }
 
     createProgressbar (x, y)
     {
+
+        // Sketch
+        // -4  -3  -2  -1   0   1   2   3   4
+        //  |   |   |   |   |   |   |   |   |
+        // => 9 positions, 8 intervals
+
         // size & position
         let width = 200;
         let height = 15;
@@ -131,6 +167,31 @@ class PlayScene extends Phaser.Scene {
             this.scene.start('title');
 
         }, this); */
+    }
+
+    checkVictory(){
+        let actualMoistness = this.char1.data.values.moistnessStart + this.dish.moistness;
+
+        let actualHeat = this.char1.data.values.heatStart + this.dish.heat;
+
+        let goalMoistness = this.char1.data.values.moistnessEnd;
+        let goalHeat = this.char1.data.values.heatEnd;
+
+        if(actualMoistness == goalMoistness &&
+            actualHeat == goalHeat) {
+                console.log("Victory !");
+                this.nextLevel(this, this.levelNumber);
+            }
+    }
+
+    nextLevel(scene, level){
+        scene.cameras.main.fadeOut();
+        scene.time.addEvent({
+            delay: 2000,
+            callback: () => {
+                scene.scene.restart({ level: this.currentLevel + 1 })
+            }
+        })
     }
 }
 

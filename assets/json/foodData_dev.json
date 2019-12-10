@@ -3,12 +3,14 @@
         {
             "name" : "leek",
             "heat" : 3,
-            "moistness" : -2
+            "moistness" : -2,
+            "price" : 2
         },
         {
             "name" : "bread",
             "heat" : 2,
-            "moistness" : 0
+            "moistness" : 0,
+            "price" : 4
         }
     ]
 }
