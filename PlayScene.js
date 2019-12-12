@@ -9,15 +9,15 @@ class PlayScene extends Phaser.Scene {
         this.currentLevel = level;
     }
 
+    // Restarted at each level
     create ()
     {
-        console.log(this.currentLevel);
+        
+        this.physics.world.setBoundsCollision(true, true, true, true);
 
         let levelName = 'level' + this.currentLevel.toString();
 
         let levelData = levels[this.currentLevel];
-        console.log(levelData);
-
 
         // Declarations of data
         this.foodData = this.cache.json.get('foodData');
@@ -25,10 +25,6 @@ class PlayScene extends Phaser.Scene {
 
         // Declarations of images (decoration only)
         this.background = this.add.image(300, 400, 'background');
-
-        // Creation of the progress bars
-        let heatBar = this.createProgressbar(150, 50);
-        let moistBar = this.createProgressbar(150, 80);
 
         // Declarations of sprites (for physics)
         this.shelf = this.physics.add.sprite(100, 550, 'shelf');
@@ -44,6 +40,8 @@ class PlayScene extends Phaser.Scene {
             this.foods.add(new_food);
         }, this);
 
+        // this.foods.setCollideWorldBounds(true, 0.75);
+
         Phaser.Actions.GridAlign(this.foods.getChildren(), {
             width: 10,
             height: 10,
@@ -55,7 +53,12 @@ class PlayScene extends Phaser.Scene {
 
         this.dragFood();
 
-        this.char1 = new Character(this, levelData.char); // now just texture, not frame
+        this.char = new Character(this, levelData.char); // now just texture, not frame
+
+
+        // Creation of the progress bars
+        this.heatBar = this.createProgressbar(150, 50, this.char.data.values.heatStart);
+        this.moistBar = this.createProgressbar(150, 80, this.char.data.values.moistnessStart);
 
         this.dish = {
             foods : [],
@@ -69,9 +72,15 @@ class PlayScene extends Phaser.Scene {
     }
 
     update() {
+        // checkPos();
     }
 
     dragFood() {
+        this.input.on('dragstart', function(pointer, food, dragX, dragY){
+            food.body.setAllowGravity(false);
+            console.log(food)
+        })
+        
         this.input.on('drag', function(pointer, food, dragX, dragY){
             food.x = dragX;
             food.y = dragY;
@@ -79,11 +88,17 @@ class PlayScene extends Phaser.Scene {
 
         this.input.on('dragend', function(pointer, food){
         if(food.x < config.width/2) {
-            return;
 
+            // this.physics.moveTo(food, food.input.dragStartX, food.input.dragStartY, 5, 1000);
+
+            // position y == height of shelf => return in shelf
             // food.input.dragStartX vs food.x
+
         } else {
+            food.body.setAllowGravity(true);
             food.setGravity(0, 4000);
+            food.setCollideWorldBounds(true);
+            food.setBounce(0.75);
         }
         });
 
@@ -104,11 +119,20 @@ class PlayScene extends Phaser.Scene {
 
         // write in the recipe
         // move gauges
-
         this.checkVictory();
     }
 
-    createProgressbar (x, y)
+    // checkPos()
+    // {
+    //     Phaser.Actions.Call(foods.getChildren(), 
+    //     function(food){
+    //         if(food.y > config.height){
+    //             return;
+    //         }
+    //     });
+    // }
+
+    createProgressbar (x, y, value)
     {
 
         // Sketch
@@ -142,9 +166,12 @@ class PlayScene extends Phaser.Scene {
         // test to see filled bar
         let progressbar = this.add.graphics();
 
+        let percentage = (value + 4)/8;
+
         var color = Phaser.Display.Color.GetColor(255, 255, 0);
         progressbar.fillStyle(color, 1);
-        progressbar.fillRect(xStart, yStart, 0.5 * width, height);
+        progressbar.fillRect(xStart, yStart, percentage * width, height);
+    }
 
         /** Need to link the food data in the cauldron to
          * Update the progress bar.
@@ -167,15 +194,14 @@ class PlayScene extends Phaser.Scene {
             this.scene.start('title');
 
         }, this); */
-    }
 
     checkVictory(){
-        let actualMoistness = this.char1.data.values.moistnessStart + this.dish.moistness;
+        let actualMoistness = this.char.data.values.moistnessStart + this.dish.moistness;
 
-        let actualHeat = this.char1.data.values.heatStart + this.dish.heat;
+        let actualHeat = this.char.data.values.heatStart + this.dish.heat;
 
-        let goalMoistness = this.char1.data.values.moistnessEnd;
-        let goalHeat = this.char1.data.values.heatEnd;
+        let goalMoistness = this.char.data.values.moistnessEnd;
+        let goalHeat = this.char.data.values.heatEnd;
 
         if(actualMoistness == goalMoistness &&
             actualHeat == goalHeat) {
@@ -203,3 +229,4 @@ class PlayScene extends Phaser.Scene {
 // gameObject.setData();
 // https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Sprite.html#setData__anchor
 
+// parchemin under progress bars

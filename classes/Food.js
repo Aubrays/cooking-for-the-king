@@ -1,22 +1,27 @@
 class Food extends Phaser.Physics.Arcade.Sprite {
-    constructor(self, texture, frame){
-        super(self, self.x, self.y);
+    constructor(scene, texture, frame){
+        super(scene, scene.x, scene.y);
+
+        // scene.physics.world.enable(this);
+        
 
         this.setTexture(texture);
         this.setFrame(frame);
 
-        let dataObj = self.foodData.foods.find(obj => obj.name === frame);
+        let dataObj = scene.foodData.foods.find(obj => obj.name === frame);
    
         this.setData(dataObj);
 
         this.setInteractive({
             draggable: true
         });
+        scene.physics.add.existing(this);
+        
 
-        this.collideWorldBounds = true;
+        this.setCollideWorldBounds(true);
+        this.setBounce(0.75, 0.75);
 
-
-        this.scene.add.existing(this);
+        scene.add.existing(this);
     }
 
 }
