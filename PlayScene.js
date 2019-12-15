@@ -78,6 +78,7 @@ class PlayScene extends Phaser.Scene {
     dragFood() {
         this.input.on('dragstart', function(pointer, food, dragX, dragY){
             food.body.setAllowGravity(false);
+            food.setVelocity(0,0);
             console.log(food)
         })
         

@@ -20,9 +20,27 @@ class BootScene extends Phaser.Scene {
 
         this.load.json('foodData', 'json/foodData_dev.json');
         this.load.json('charData', 'json/charData.json');
+
+
+        // add a global path "assets/sounds/ambiance/" to avoid repetition.
+        this.load.setPath('assets/sounds/ambiance/');
+        this.load.audio('music', 'Locations_Medieval_Tavern_Song.mp3');
     }
 
     create() {
+        this.music = this.sound.add("music");
+
+        let musicConfig = {
+            mute: true, //Unmute if necessary. Thank you for my ears. d(^_^)b
+            volume: 0.5,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
+
+        this.music.play(musicConfig);
         this.scene.start("menuGame");
     }
 
