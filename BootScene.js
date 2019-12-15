@@ -24,7 +24,7 @@ class BootScene extends Phaser.Scene {
 
         // add a global path "assets/sounds/ambiance/" to avoid repetition.
         this.load.setPath('assets/sounds/ambiance/');
-        this.load.audio('music', 'Locations_Medieval_Tavern_Song.mp3');
+        this.load.audio('music', ['Locations_Medieval_Tavern_Song.mp3','Locations_Medieval_Tavern_Song.ogg']);
     }
 
     create() {
