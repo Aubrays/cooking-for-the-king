@@ -87,28 +87,39 @@ class PlayScene extends Phaser.Scene {
             food.y = dragY;
         })
 
-        this.input.on('dragend', function(pointer, food){
+        this.input.on('dragend', function(pointer, food, dropped){
         if(food.x < config.width/2) {
 
             // this.physics.moveTo(food, food.input.dragStartX, food.input.dragStartY, 5, 1000);
 
             // position y == height of shelf => return in shelf
             // food.input.dragStartX vs food.x
+            if (!dropped)
+            {
+                food.x = food.input.dragStartX;
+                food.y = food.input.dragStartY;
+            }
 
         } else {
             food.body.setAllowGravity(true);
-            food.setGravity(0, 4000);
+            food.setGravity(0, 3000);
             food.setCollideWorldBounds(true);
-            food.setBounce(0.75);
+            food.setBounce(0.5);
         }
         });
 
-        
+
     }
 
     cauldronTouch(cauldron, food) {
         food.disableBody(true, true);
         console.log(food.getData('name'));
+
+        // add sounds
+        this.plop = this.sound.add("plop");
+        this.plop.play();
+        this.plop = this.sound.add("splash");
+        this.plop.play();
 
         // add to the dish
 
@@ -217,8 +228,11 @@ class PlayScene extends Phaser.Scene {
             delay: 2000,
             callback: () => {
                 scene.scene.restart({ level: this.currentLevel + 1 })
-            }
+                this.winSound = this.sound.add("win");
+                this.winSound.play();
+            } 
         })
+        
     }
 }
 

@@ -23,8 +23,16 @@ class BootScene extends Phaser.Scene {
 
 
         // add a global path "assets/sounds/ambiance/" to avoid repetition.
+        this.load.setPath('assets/sounds/');
+        this.load.audio("plop", "plop_01.mp3");
+        this.load.audio("splash", "splash_01.wav");
+        this.load.audio("fire", "Home_Office_fireplace_01.mp3");
+        this.load.audio("win", "achievment_03.mp3");
+        this.load.audio("wood", "collision_wood_soft_01.wav");
+
         this.load.setPath('assets/sounds/ambiance/');
         this.load.audio('music', ['Locations_Medieval_Tavern_Song.mp3','Locations_Medieval_Tavern_Song.ogg']);
+        
     }
 
     create() {
@@ -32,7 +40,7 @@ class BootScene extends Phaser.Scene {
 
         let musicConfig = {
             mute: true, //Unmute if necessary. Thank you for my ears. d(^_^)b
-            volume: 0.5,
+            volume: 0.3,
             rate: 1,
             detune: 0,
             seek: 0,
@@ -41,6 +49,21 @@ class BootScene extends Phaser.Scene {
         }
 
         this.music.play(musicConfig);
+        
+
+        this.music = this.sound.add("fire");
+
+        let fireConfig = {
+            mute: true, 
+            volume: 0.7,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
+
+        this.music.play(fireConfig);
         this.scene.start("menuGame");
     }
 
