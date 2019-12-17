@@ -169,15 +169,13 @@ class PlayScene extends Phaser.Scene {
 
 
     checkVictory(){
+        // TODO : same variables are repeated in this.cauldronTouch()
         let actualMoistness = this.char.data.values.moistnessStart + this.dish.moistness;
 
         let actualHeat = this.char.data.values.heatStart + this.dish.heat;
 
         let goalMoistness = this.char.data.values.moistnessEnd;
         let goalHeat = this.char.data.values.heatEnd;
-
-
-
 
         if(actualMoistness == goalMoistness &&
             actualHeat == goalHeat) {

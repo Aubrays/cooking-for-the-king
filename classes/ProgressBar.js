@@ -9,9 +9,6 @@ class ProgressBar extends Phaser.GameObjects.Graphics {
         super(scene, options);
 
         config.bar = options;
-        // config.bar.pos.x -= ( config.bar.size.w / 2 ); /// center on X axis ////
-        // config.bar.pos.y -= ( config.bar.size.h / 2 ); /// center on Y axis ////
-
 
         this.x = config.bar.pos.x/2; // Must divided by 2 for an unknown reason...
         this.y = config.bar.pos.y/2; // Must divided by 2 for an unknown reason...
@@ -65,7 +62,6 @@ class ProgressBar extends Phaser.GameObjects.Graphics {
                 alpha: 0.5
             }
         });
-
         scale.setDepth(90);
 
         for(let rank = 1; rank < 8; rank++){
@@ -76,13 +72,12 @@ class ProgressBar extends Phaser.GameObjects.Graphics {
                 this.y*2 + this.z
             );
             scale.strokeLineShape(scaleStroke);
-            console.log(rank);
         }
 
         scene.add.existing(this);
     }
 
-    updateProgressBar(value){ //// health percentage
+    updateProgressBar(value){
         
         if(this.state == 'created'){
             value = this.startValue;
@@ -94,7 +89,4 @@ class ProgressBar extends Phaser.GameObjects.Graphics {
         this.fillRect( this.x, this.y, percentage * this.w , this.z);
         this.setState('updated');
     }
-    // ...
-
-    // preUpdate(time, delta) {}
 }

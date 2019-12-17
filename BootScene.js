@@ -22,7 +22,7 @@ class BootScene extends Phaser.Scene {
         this.load.json('charData', 'json/charData.json');
 
 
-        // add a global path "assets/sounds/ambiance/" to avoid repetition.
+        // add a global path "assets/sounds" to avoid repetition.
         this.load.setPath('assets/sounds/');
         this.load.audio("plop", "plop_01.mp3");
         this.load.audio("splash", "splash_01.wav");
