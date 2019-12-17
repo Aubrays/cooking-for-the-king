@@ -26,12 +26,10 @@ class BootScene extends Phaser.Scene {
         this.load.setPath('assets/sounds/');
         this.load.audio("plop", "plop_01.mp3");
         this.load.audio("splash", "splash_01.wav");
-        this.load.audio("fire", "Home_Office_fireplace_01.mp3");
+        this.load.audio("fire", "Home_Office_Fireplace_01.mp3");
         this.load.audio("win", "achievment_03.mp3");
         this.load.audio("wood", "collision_wood_soft_01.wav");
-
-        this.load.setPath('assets/sounds/ambiance/');
-        this.load.audio('music', ['Locations_Medieval_Tavern_Song.mp3','Locations_Medieval_Tavern_Song.ogg']);
+        this.load.audio('music', ['ambiance/Locations_Medieval_Tavern_Song.mp3','ambiance/Locations_Medieval_Tavern_Song.ogg']);
         
     }
 

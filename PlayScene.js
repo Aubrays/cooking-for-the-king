@@ -217,8 +217,16 @@ class PlayScene extends Phaser.Scene {
 
         if(actualMoistness == goalMoistness &&
             actualHeat == goalHeat) {
-                console.log("Victory !");
-                this.nextLevel(this, this.levelNumber);
+                this.time.addEvent({
+                    delay: 500,
+                    callback: () => {
+                        console.log("Victory !");
+                    this.nextLevel(this, this.levelNumber);
+                        this.winSound = this.sound.add("win");
+                        this.winSound.play();
+                    } 
+                })
+                
             }
     }
 
@@ -228,8 +236,6 @@ class PlayScene extends Phaser.Scene {
             delay: 2000,
             callback: () => {
                 scene.scene.restart({ level: this.currentLevel + 1 })
-                this.winSound = this.sound.add("win");
-                this.winSound.play();
             } 
         })
         
