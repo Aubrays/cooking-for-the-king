@@ -57,8 +57,25 @@ class PlayScene extends Phaser.Scene {
 
 
         // Creation of the progress bars
-        this.heatBar = this.createProgressbar(150, 50, this.char.data.values.heatStart);
-        this.moistBar = this.createProgressbar(150, 80, this.char.data.values.moistnessStart);
+        this.heatBar = new ProgressBar(this, {
+            pos: { x: 100, y: 40 },
+            size: { w: 200, h: 20 },
+            fill_color: 0xcc0000,
+            border_color: 0x000000,
+            startValue: this.char.data.values.heatStart,
+            goalValue: this.char.data.values.heatEnd
+        });
+        this.heatBar.updateProgressBar();
+
+        this.moistBar = new ProgressBar (this, {
+            pos: { x: 100, y: 80 },
+            size: { w: 200, h: 20 },
+            fill_color: 0x0000cc,
+            border_color: 0x000000,
+            startValue: this.char.data.values.moistnessStart,
+            goalValue: this.char.data.values.moistnessEnd
+        });
+        this.moistBar.updateProgressBar();
 
         this.dish = {
             foods : [],
@@ -79,7 +96,6 @@ class PlayScene extends Phaser.Scene {
         this.input.on('dragstart', function(pointer, food, dragX, dragY){
             food.body.setAllowGravity(false);
             food.setVelocity(0,0);
-            console.log(food)
         })
         
         this.input.on('drag', function(pointer, food, dragX, dragY){
@@ -131,6 +147,13 @@ class PlayScene extends Phaser.Scene {
 
         // write in the recipe
         // move gauges
+
+        let actualMoistness = this.char.data.values.moistnessStart + this.dish.moistness;
+
+        let actualHeat = this.char.data.values.heatStart + this.dish.heat;
+
+        this.heatBar.updateProgressBar(actualHeat);
+        this.moistBar.updateProgressBar(actualMoistness);
         this.checkVictory();
     }
 
@@ -144,68 +167,6 @@ class PlayScene extends Phaser.Scene {
     //     });
     // }
 
-    createProgressbar (x, y, value)
-    {
-
-        // Sketch
-        // -4  -3  -2  -1   0   1   2   3   4
-        //  |   |   |   |   |   |   |   |   |
-        // => 9 positions, 8 intervals
-
-        // size & position
-        let width = 200;
-        let height = 15;
-        let xStart = x - width / 2;
-        let yStart = y - height / 2;
-
-        // border size
-        let borderOffset = 2;
-
-        let borderRect = new Phaser.Geom.Rectangle(
-            xStart - borderOffset,
-            yStart - borderOffset,
-            width + borderOffset * 2,
-            height + borderOffset * 2);
-
-        let border = this.add.graphics({
-            lineStyle: {
-                width: 2,
-                color: 0x000000
-            }
-        });
-        border.strokeRectShape(borderRect);
-
-        // test to see filled bar
-        let progressbar = this.add.graphics();
-
-        let percentage = (value + 4)/8;
-
-        var color = Phaser.Display.Color.GetColor(255, 255, 0);
-        progressbar.fillStyle(color, 1);
-        progressbar.fillRect(xStart, yStart, percentage * width, height);
-    }
-
-        /** Need to link the food data in the cauldron to
-         * Update the progress bar.
-         * 
-         * @param {number} percentage 
-         */
-        /*let updateProgressbar = function (percentage)
-        {
-            progressbar.clear();
-            progressbar.fillStyle(0xffffff, 1);
-            progressbar.fillRect(xStart, yStart, percentage * width, height);
-        };
-
-        this.load.on('progress', updateProgressbar);
-
-        this.load.once('complete', function ()
-        {
-
-            this.load.off('progress', updateProgressbar);
-            this.scene.start('title');
-
-        }, this); */
 
     checkVictory(){
         let actualMoistness = this.char.data.values.moistnessStart + this.dish.moistness;
@@ -214,6 +175,9 @@ class PlayScene extends Phaser.Scene {
 
         let goalMoistness = this.char.data.values.moistnessEnd;
         let goalHeat = this.char.data.values.heatEnd;
+
+
+
 
         if(actualMoistness == goalMoistness &&
             actualHeat == goalHeat) {
@@ -228,6 +192,14 @@ class PlayScene extends Phaser.Scene {
                 })
                 
             }
+
+        if(actualMoistness <= -4 || actualMoistness >= 4) {
+            console.log("Defeat !")
+        }
+
+        if(actualHeat <= -4 || actualHeat >= 4) {
+            console.log("Defheat !")
+        }
     }
 
     nextLevel(scene, level){
