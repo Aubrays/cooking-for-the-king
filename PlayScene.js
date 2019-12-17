@@ -57,9 +57,6 @@ class PlayScene extends Phaser.Scene {
 
 
         // Creation of the progress bars
-        // this.heatBar = this.createProgressbar(150, 50, this.char.data.values.heatStart);
-        // this.moistBar = this.createProgressbar(150, 80, this.char.data.values.moistnessStart);
-
         this.heatBar = new ProgressBar(this, {
             pos: { x: 100, y: 40 },
             size: { w: 200, h: 20 },
@@ -99,7 +96,6 @@ class PlayScene extends Phaser.Scene {
         this.input.on('dragstart', function(pointer, food, dragX, dragY){
             food.body.setAllowGravity(false);
             food.setVelocity(0,0);
-            console.log(food)
         })
         
         this.input.on('drag', function(pointer, food, dragX, dragY){
@@ -140,8 +136,13 @@ class PlayScene extends Phaser.Scene {
 
         // write in the recipe
         // move gauges
-        this.heatBar.updateProgressBar(this.dish.heat);
-        this.moistBar.updateProgressBar(this.dish.moistness);
+
+        let actualMoistness = this.char.data.values.moistnessStart + this.dish.moistness;
+
+        let actualHeat = this.char.data.values.heatStart + this.dish.heat;
+
+        this.heatBar.updateProgressBar(actualHeat);
+        this.moistBar.updateProgressBar(actualMoistness);
         this.checkVictory();
     }
 

@@ -41,31 +41,45 @@ class ProgressBar extends Phaser.GameObjects.Graphics {
         });
         border.strokeRectShape(borderRect);
 
-        // let goalStroke = new Phaser.Geom.Line(
-        //     ((this.startValue + 4) / 8) * this.x*2,
-        //     this.z*2,
-        //     ((this.startValue + 4) / 8) * this.x*2 +2,
-        //     this.y*2 + this.z
-        // );
-        let goalStroke = new Phaser.Geom.Line(
-            this.x*2,
-            this.y*2 + borderOffset,
-            this.x*2,
-            this.z + borderOffset
-        );
 
-        console.log(goalStroke);
+        let goalStroke = new Phaser.Geom.Line(
+            ((this.goalValue + 4) / 8) * this.w + this.x*2 - borderOffset*2,
+            this.y*2,
+            ((this.goalValue + 4) / 8) * this.w + this.x*2 - borderOffset*2,
+            this.y*2 + this.z
+        );
 
         let goal = scene.add.graphics({
             lineStyle: {
-                color: 0x00cc00
+                color: 0x00cc00,
+                width: 4
             }
         });
         goal.strokeLineShape(goalStroke);
         goal.setDepth(100); // Same as z-index
 
+        let scale = scene.add.graphics({
+            lineStyle: {
+                color: 0x333333,
+                width: 2,
+                alpha: 0.5
+            }
+        });
+
+        scale.setDepth(90);
+
+        for(let rank = 1; rank < 8; rank++){
+            let scaleStroke = new Phaser.Geom.Line(
+                rank/8 * this.w + this.x*2 - borderOffset ,
+                this.y*2,
+                rank/8 * this.w + this.x*2 - borderOffset,
+                this.y*2 + this.z
+            );
+            scale.strokeLineShape(scaleStroke);
+            console.log(rank);
+        }
+
         scene.add.existing(this);
-        console.log('create x,y:' + this.x + ',' + this.y);
     }
 
     updateProgressBar(value){ //// health percentage
@@ -78,7 +92,6 @@ class ProgressBar extends Phaser.GameObjects.Graphics {
         this.clear();
         this.fillStyle( this.defaultFillColor, this.defaultFillAlpha );
         this.fillRect( this.x, this.y, percentage * this.w , this.z);
-        console.log('update x,y:' + this.x + ',' + this.y);
         this.setState('updated');
     }
     // ...
