@@ -8,9 +8,17 @@ const level1 = {
 const level2 = {
     foods : [
         'leek', 
-        'bread'
+        'bread',
+        'leek'
     ],
     char : 'Charles'
 }
-
-const levels = [level1, level2];
+const level3 = {
+    foods : [
+        'leek', 
+        'leek',
+        'leek'
+    ],
+    char : 'Alebert le Vert'
+}
+const levels = [level1, level2,level3];

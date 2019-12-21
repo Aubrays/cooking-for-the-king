@@ -14,6 +14,8 @@ class BootScene extends Phaser.Scene {
         this.load.image('shelf', 'sprites/shelf.png');
         this.load.image('Mélisende', 'chars/char1/1.png');
         this.load.image('Charles', 'chars/char2/2.png');
+        // FIXME: putting "char3" in lieu of "char2" here doesn't load the texture...
+        this.load.image('Alebert le Vert', 'chars/char2/3.png');
 
         // Atla generated with http://free-tex-packer.com/
         this.load.atlas('foods', 'sprites/food_dev.png', 'sprites/food_dev_atlas.json');
