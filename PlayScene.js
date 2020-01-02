@@ -31,8 +31,26 @@ class PlayScene extends Phaser.Scene {
         this.cauldron = this.physics.add.sprite(450, 725, 'cauldron');
         this.cauldron.body.setSize(200, 20);
         this.cauldron.body.setOffset(60, 50);
+        this.book = this.add.sprite(100, 350, 'book').setInteractive();
+        this.book.setScale(0.2);
 
         this.foods = this.physics.add.group();
+
+        //Generates the recipe book container
+        this.openBook = this.add.image(0, 0, 'openBook');
+        this.openBook.setScale(0.2);
+        this.close = this.add.text(140, -90, 'X');
+        this.close.setTint(0xff0000);
+        this.text = this.add.text(20, -70, 'Recipe');
+
+        this.container = this.add.container(400, 300, [ this.openBook, this.text, this.close ]);
+        /*this.container.visible = false;
+        this.book.on('pointerdown', function () {
+
+            this.container.visible = true;
+        });*/
+        
+        this.posY = -50;
 
         // Generate foods for the level 1
         Phaser.Actions.Call(levelData.foods, function(food){
@@ -95,6 +113,7 @@ class PlayScene extends Phaser.Scene {
         this.input.on('dragstart', function(pointer, food, dragX, dragY){
             food.body.setAllowGravity(false);
             food.setVelocity(0,0);
+            
         })
         
         this.input.on('drag', function(pointer, food, dragX, dragY){
@@ -102,27 +121,26 @@ class PlayScene extends Phaser.Scene {
             food.y = dragY;
         })
 
-        this.input.on('dragend', function(pointer, food, dropped){
-        if(food.x < config.width/2) {
+        this.input.on('dragend', function(pointer, food){
+            if(food.x < config.width/2) {
 
             // this.physics.moveTo(food, food.input.dragStartX, food.input.dragStartY, 5, 1000);
 
             // position y == height of shelf => return in shelf
             // food.input.dragStartX vs food.x
-            if (!dropped)
-            {
+            
                 food.x = food.input.dragStartX;
                 food.y = food.input.dragStartY;
-            }
+            
 
-        } else {
-            food.body.setAllowGravity(true);
-            food.setGravity(0, 3000);
-            food.setCollideWorldBounds(true);
-            food.setBounce(0.5);
-        }
+            } else {
+                food.body.setAllowGravity(true);
+                food.setGravity(0, 3000);
+                food.setCollideWorldBounds(true);
+                food.setBounce(0.5);
+                }
+            
         });
-
 
     }
 
@@ -133,8 +151,8 @@ class PlayScene extends Phaser.Scene {
         // add sounds
         this.plop = this.sound.add("plop");
         this.plop.play();
-        this.plop = this.sound.add("splash");
-        this.plop.play();
+        this.splash = this.sound.add("splash");
+        this.splash.play();
 
         // add to the dish
 
@@ -145,6 +163,11 @@ class PlayScene extends Phaser.Scene {
 
 
         // write in the recipe
+        this.recipe = this.add.text(30, this.posY, food.getData('name'));
+        this.container.add(this.recipe);
+        this.posY + 20;
+
+
         // move gauges
 
         let actualMoistness = this.char.data.values.moistnessStart + this.dish.moistness;
@@ -229,6 +252,8 @@ class PlayScene extends Phaser.Scene {
         })
         
     }
+
+    
 }
 
 
