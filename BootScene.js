@@ -12,6 +12,8 @@ class BootScene extends Phaser.Scene {
         this.load.image('background', 'sprites/background.jpg');
         this.load.image('cauldron', 'sprites/cauldron2.png');
         this.load.image('shelf', 'sprites/shelf.png');
+        this.load.image('book', 'sprites/book.png');
+        this.load.image('openBook', 'sprites/openBook.png');
         //trying something
         this.load.spritesheet('Mélisende', 'chars/char1.png',
                                 {frameWidth:600,
