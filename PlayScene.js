@@ -168,7 +168,6 @@ class PlayScene extends Phaser.Scene {
 
 
     checkVictory(){
-        // TODO : same variables are repeated in this.cauldronTouch()
         let actualMoistness = this.char.data.values.moistnessStart + this.dish.moistness;
         let actualHeat = this.char.data.values.heatStart + this.dish.heat;
         let goalMoistness = this.char.data.values.moistnessEnd;
@@ -176,22 +175,25 @@ class PlayScene extends Phaser.Scene {
          // function to change character appearence according to state of health.
         function checkHealth(){
             // based on the difference between actual and goal values
-            let diff = (actualMoistness - goalMoistness) + (actualHeat - goalHeat)
+            let diff = ((Math.abs(actualMoistness - goalMoistness))
+                        + (Math.abs(actualHeat - goalHeat)))
+            console.log(diff)
             // return a value which will correspond to a certain frame
+            // TODO: adjust values so this works better
             if (diff > 8){
                 // this for the worst state
                 return 0
                 }
-            if (8 < diff < 4){
+            else if (8 > diff && diff > 4){
                 // this for medium
                 return 1
                 }
-            if (4 <diff < 0){
+            else if (4 > diff && diff > 0){
                 // this for doing well
                 return 2
                 }
             }
-            console.log(checkHealth())
+            console.log("health: " + checkHealth())
             // then assign the value from checkHealth to frame in char
             this.char.setFrame(checkHealth())
         if(actualMoistness == goalMoistness &&
