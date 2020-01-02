@@ -26,7 +26,7 @@
     {
         "name" : "poireau",
         "heat" : 3,
-        "moistness" : -2,
+        "moistness" : 0,
         "source" : "Tacuinum Sanitatis",
         "price" : 0
     },
