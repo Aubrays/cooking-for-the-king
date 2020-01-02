@@ -28,6 +28,8 @@ class BootScene extends Phaser.Scene {
                                 {frameWidth:600,
                                 frameHeight:600});
 
+        this.load.bitmapFont('augustaInk', 'fonts/augusta.png', 'fonts/augusta.fnt');
+
         // Atlas generated with http://free-tex-packer.com/
         this.load.atlas('foods', 'sprites/food_dev.png', 'sprites/food_dev_atlas.json');
 

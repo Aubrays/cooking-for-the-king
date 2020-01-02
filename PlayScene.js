@@ -12,10 +12,7 @@ class PlayScene extends Phaser.Scene {
     // Restarted at each level
     create ()
     {
-        
         this.physics.world.setBoundsCollision(true, true, true, true);
-
-        let levelName = 'level' + this.currentLevel.toString();
 
         let levelData = levels[this.currentLevel];
 
@@ -34,8 +31,6 @@ class PlayScene extends Phaser.Scene {
         this.book = this.add.sprite(100, 350, 'book').setInteractive();
         this.book.setScale(0.2);
 
-        this.foods = this.physics.add.group();
-
         //Generates the recipe book container
         this.openBook = this.add.image(0, 0, 'openBook');
         this.openBook.setScale(0.2);
@@ -50,7 +45,11 @@ class PlayScene extends Phaser.Scene {
             this.container.visible = true;
         });*/
         
-        this.posY = -50;
+        // this.posY = -50;
+
+        this.levelText = new LevelText(this, this.currentLevel);
+
+        this.foods = this.physics.add.group();
 
         // Generate foods for the level 1
         Phaser.Actions.Call(levelData.foods, function(food){
@@ -234,6 +233,11 @@ class PlayScene extends Phaser.Scene {
             }
 
         if(actualMoistness <= -4 || actualMoistness >= 4) {
+            this.cameras.main.shake(500, 0.025)
+            this.time.addEvent({
+                delay: 500,
+                callback: () => this.scene.restart()
+            })
             console.log("Defeat !")
         }
 
