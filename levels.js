@@ -13,12 +13,4 @@ const level2 = {
     char : 'Charles'
 }
 
-const level3 = {
-    foods : [
-        'leek',
-        'bread',
-        
-    ]
-}
-
 const levels = [level1, level2];

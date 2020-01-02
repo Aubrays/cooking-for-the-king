@@ -71,8 +71,7 @@ class PlayScene extends Phaser.Scene {
 
         this.dragFood();
 
-        this.char = new Character(this, levelData.char); // this needs to be frames, not textures.
-
+        this.char = new Character(this, levelData.char, 0);
 
         // Creation of the progress bars
         this.heatBar = new ProgressBar(this, {
@@ -194,18 +193,30 @@ class PlayScene extends Phaser.Scene {
     checkVictory(){
         // TODO : same variables are repeated in this.cauldronTouch()
         let actualMoistness = this.char.data.values.moistnessStart + this.dish.moistness;
-
         let actualHeat = this.char.data.values.heatStart + this.dish.heat;
-
         let goalMoistness = this.char.data.values.moistnessEnd;
         let goalHeat = this.char.data.values.heatEnd;
          // function to change character appearence according to state of health.
-         // placed inside checkVictory as uses many of the same variables.
         function checkHealth(){
-            if (actualMoistness < -2 || actualMoistness >2){
-        
+            // based on the difference between actual and goal values
+            let diff = (actualMoistness - goalMoistness) + (actualHeat - goalHeat)
+            // return a value which will correspond to a certain frame
+            if (diff > 8){
+                // this for the worst state
+                return 0
+                }
+            if (8 < diff < 4){
+                // this for medium
+                return 1
+                }
+            if (4 <diff < 0){
+                // this for doing well
+                return 2
+                }
             }
-            }
+            console.log(checkHealth())
+            // then assign the value from checkHealth to frame in char
+            this.char.setFrame(checkHealth())
         if(actualMoistness == goalMoistness &&
             actualHeat == goalHeat) {
                 this.time.addEvent({
