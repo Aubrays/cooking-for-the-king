@@ -16,6 +16,8 @@ class BootScene extends Phaser.Scene {
         this.load.image('Charles', 'chars/char2/3.png');
         this.load.image('Gunièvre', 'chars/char3/3.png');
         this.load.image('Loïc', 'chars/char4/3.png');
+        this.load.image('book', 'sprites/book.png');
+        this.load.image('openBook', 'sprites/openBook.png');
 
         // Atlas generated with http://free-tex-packer.com/
         this.load.atlas('foods', 'sprites/food_dev.png', 'sprites/food_dev_atlas.json');
