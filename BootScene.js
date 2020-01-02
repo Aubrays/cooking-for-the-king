@@ -12,10 +12,12 @@ class BootScene extends Phaser.Scene {
         this.load.image('background', 'sprites/background.jpg');
         this.load.image('cauldron', 'sprites/cauldron2.png');
         this.load.image('shelf', 'sprites/shelf.png');
-        this.load.image('Mélisende', 'chars/char1/1.png');
-        this.load.image('Charles', 'chars/char2/2.png');
+        this.load.image('Mélisende', 'chars/char1/3.png');
+        this.load.image('Charles', 'chars/char2/3.png');
+        this.load.image('Gunièvre', 'chars/char3/3.png');
+        this.load.image('Loïc', 'chars/char4/3.png');
 
-        // Atla generated with http://free-tex-packer.com/
+        // Atlas generated with http://free-tex-packer.com/
         this.load.atlas('foods', 'sprites/food_dev.png', 'sprites/food_dev_atlas.json');
 
         this.load.json('foodData', 'json/foodData_dev.json');

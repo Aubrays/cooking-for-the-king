@@ -53,7 +53,7 @@ class PlayScene extends Phaser.Scene {
 
         this.dragFood();
 
-        this.char = new Character(this, levelData.char); // now just texture, not frame
+        this.char = new Character(this, levelData.char); // this needs to be frames, not textures.
 
 
         // Creation of the progress bars
@@ -176,7 +176,13 @@ class PlayScene extends Phaser.Scene {
 
         let goalMoistness = this.char.data.values.moistnessEnd;
         let goalHeat = this.char.data.values.heatEnd;
-
+         // function to change character appearence according to state of health.
+         // placed inside checkVictory as uses many of the same variables.
+        function checkHealth(){
+            if (actualMoistness < -2 || actualMoistness >2){
+        
+            }
+            }
         if(actualMoistness == goalMoistness &&
             actualHeat == goalHeat) {
                 this.time.addEvent({
