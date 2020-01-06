@@ -39,18 +39,28 @@ class PlayScene extends Phaser.Scene {
         //Generates the recipe book container
         this.openBook = this.add.image(0, 0, 'openBook');
         this.openBook.setScale(0.2);
-        this.close = this.add.text(140, -90, 'X');
+        this.close = this.add.text(140, -90, 'X').setInteractive();
         this.close.setTint(0xff0000);
-        this.text = this.add.text(20, -70, 'Recipe');
-
+        this.text = this.add.text(20, -70, 'Recipe', { fontFamily: 'Verdana, Tahoma, serif' });
+        this.text.setTint(0x000000);
+        this.posY = this.text.y;
         this.container = this.add.container(400, 300, [ this.openBook, this.text, this.close ]);
-        /*this.container.visible = false;
-        this.book.on('pointerdown', function () {
+        this.container.visible = false;
 
+        //opening and closing the book
+        this.book.on('pointerdown', function(){
+            if (this.container.visible == false){
+                this.page = this.sound.add("page");
+                this.page.play();
+            }
             this.container.visible = true;
-        });*/
+        }, this);
+        this.close.on('pointerdown', function(){
+            this.container.visible = false;
+            this.page = this.sound.add("page");
+            this.page.play();
+        }, this);
         
-        this.posY = -50;
 
         // Generate foods for the level 1
         Phaser.Actions.Call(levelData.foods, function(food){
@@ -163,9 +173,11 @@ class PlayScene extends Phaser.Scene {
 
 
         // write in the recipe
-        this.recipe = this.add.text(30, this.posY, food.getData('name'));
+        this.posY += 20;
+        this.recipe = this.add.text(30, this.posY, "- " + food.getData('name'));
+        this.recipe.setTint(0x000000);
         this.container.add(this.recipe);
-        this.posY + 20;
+        
 
 
         // move gauges
