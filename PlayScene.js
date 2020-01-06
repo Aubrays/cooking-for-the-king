@@ -37,13 +37,13 @@ class PlayScene extends Phaser.Scene {
         this.foods = this.physics.add.group();
 
         //Generates the recipe book container
-        this.posY = -70;
         this.openBook = this.add.image(0, 0, 'openBook');
         this.openBook.setScale(0.2);
         this.close = this.add.text(140, -90, 'X').setInteractive();
         this.close.setTint(0xff0000);
         this.text = this.add.text(20, -70, 'Recipe', { fontFamily: 'Verdana, Tahoma, serif' });
         this.text.setTint(0x000000);
+        this.posY = this.text.y;
         this.container = this.add.container(400, 300, [ this.openBook, this.text, this.close ]);
         this.container.visible = false;
 
