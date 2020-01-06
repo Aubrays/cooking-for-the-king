@@ -10,10 +10,16 @@ class BootScene extends Phaser.Scene {
         this.load.setPath('assets/');
         // starting here, we no longer need to add "assets" in the file path.
         this.load.image('background', 'sprites/background.jpg');
-        this.load.image('cauldron', 'sprites/cauldron2.png');
+        // this.load.image('cauldron', 'sprites/cauldron2.png');
         this.load.image('shelf', 'sprites/shelf.png');
         this.load.image('book', 'sprites/book.png');
         this.load.image('openBook', 'sprites/openBook.png');
+
+        this.load.spritesheet('cauldron', 'sprites/cauldron/cauldron_blue.png', {
+            frameHeight: 339,
+            frameWidth: 256
+        });
+        
         //trying something
         this.load.spritesheet('Mélisende', 'chars/char1.png',
                                 {frameWidth:600,
@@ -75,6 +81,13 @@ class BootScene extends Phaser.Scene {
             loop: true,
             delay: 0
         }
+        this.anims.create({
+            key: 'cauldron_anim',
+            frames: this.anims.generateFrameNumbers('cauldron'),
+            frameRate: 5,
+            repeat: -1
+          });
+
 
         this.music.play(fireConfig);
         this.scene.start("menuGame");

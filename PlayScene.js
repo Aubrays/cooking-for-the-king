@@ -9,6 +9,15 @@ class PlayScene extends Phaser.Scene {
         this.currentLevel = level;
     }
 
+    preload(){
+        // Declarations of images (decoration only)
+        this.background = this.add.image(300, 400, 'background');
+
+        // Declarations of sprites (for physics)
+        this.shelf = this.physics.add.sprite(100, 550, 'shelf');
+        this.cauldron = this.physics.add.sprite(450, 625, 'cauldron');
+    }
+
     // Restarted at each level
     create ()
     {
@@ -19,15 +28,12 @@ class PlayScene extends Phaser.Scene {
         // Declarations of data
         this.foodData = this.cache.json.get('foodData');
         this.charData = this.cache.json.get('charData');
-
-        // Declarations of images (decoration only)
-        this.background = this.add.image(300, 400, 'background');
-
-        // Declarations of sprites (for physics)
-        this.shelf = this.physics.add.sprite(100, 550, 'shelf');
-        this.cauldron = this.physics.add.sprite(450, 725, 'cauldron');
+        
+        this.cauldron.play('cauldron_anim');
         this.cauldron.body.setSize(200, 20);
         this.cauldron.body.setOffset(60, 50);
+
+
         this.book = this.add.sprite(100, 350, 'book').setInteractive();
         this.book.setScale(0.2);
 
