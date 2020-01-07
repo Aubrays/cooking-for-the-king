@@ -10,6 +10,8 @@ class BootScene extends Phaser.Scene {
         this.load.setPath('assets/');
         // starting here, we no longer need to add "assets" in the file path.
         this.load.image('background', 'sprites/background.jpg');
+        this.load.image('banner', 'sprites/GUI/banner.png');
+        this.load.image('bannerParchment', 'sprites/GUI/bannerParchment.png');
         // this.load.image('cauldron', 'sprites/cauldron2.png');
         this.load.image('shelf', 'sprites/shelf.png');
         this.load.image('book', 'sprites/book.png');

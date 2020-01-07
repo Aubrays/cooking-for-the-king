@@ -15,7 +15,7 @@ class PlayScene extends Phaser.Scene {
 
         // Declarations of sprites (for physics)
         this.shelf = this.physics.add.sprite(100, 550, 'shelf');
-        this.cauldron = this.physics.add.sprite(450, 625, 'cauldron');
+        this.cauldron = this.physics.add.sprite(475, 700, 'cauldron');
     }
 
     // Restarted at each level
@@ -30,8 +30,8 @@ class PlayScene extends Phaser.Scene {
         this.charData = this.cache.json.get('charData');
         
         this.cauldron.play('cauldron_anim');
-        this.cauldron.body.setSize(200, 20);
-        this.cauldron.body.setOffset(60, 50);
+        this.cauldron.body.setSize(175, 40);
+        this.cauldron.body.setOffset(40, 100);
 
 
         this.book = this.add.sprite(100, 350, 'book').setInteractive();
@@ -53,7 +53,7 @@ class PlayScene extends Phaser.Scene {
         
         // this.posY = -50;
 
-        this.levelText = new LevelText(this, this.currentLevel);
+        this.levelText = new LevelBanner(this, this.currentLevel);
 
         this.foods = this.physics.add.group();
 
@@ -65,16 +65,11 @@ class PlayScene extends Phaser.Scene {
 
         // this.foods.setCollideWorldBounds(true, 0.75);
 
-        Phaser.Actions.GridAlign(this.foods.getChildren(), {
-            width: 10,
-            height: 10,
-            cellWidth: 32,
-            cellHeight: 32,
-            x: 100,
-            y: 550
-        });
+        this.alignFood(this);
 
-        this.dragFood();
+
+
+        
 
         this.char = new Character(this, levelData.char, 0);
 
@@ -106,6 +101,8 @@ class PlayScene extends Phaser.Scene {
             cost : 0
         }
 
+        this.dragFood(this);
+
         this.physics.add.overlap(this.foods, this.cauldron, this.cauldronTouch, null, this);
 
     }
@@ -114,7 +111,24 @@ class PlayScene extends Phaser.Scene {
         // checkPos();
     }
 
-    dragFood() {
+    alignFood(scene) {
+        Phaser.Actions.GridAlign(scene.foods.getChildren(), {
+            width: 10,
+            height: 10,
+            cellWidth: 32,
+            cellHeight: 32,
+            x: 100,
+            y: 550
+        });
+    }
+
+    realignFood(scene,food) {
+        food.body.setAllowGravity(false);
+        food.setVelocity(0,0);
+        scene.alignFood(scene);
+    }
+
+    dragFood(scene) {
         this.input.on('dragstart', function(pointer, food, dragX, dragY){
             food.body.setAllowGravity(false);
             food.setVelocity(0,0);
@@ -134,8 +148,8 @@ class PlayScene extends Phaser.Scene {
             // position y == height of shelf => return in shelf
             // food.input.dragStartX vs food.x
             
-                food.x = food.input.dragStartX;
-                food.y = food.input.dragStartY;
+                // food.x = food.input.dragStartX;
+                // food.y = food.input.dragStartY;
             
 
             } else {
@@ -143,7 +157,13 @@ class PlayScene extends Phaser.Scene {
                 food.setGravity(0, 3000);
                 food.setCollideWorldBounds(true);
                 food.setBounce(0.5);
-                }
+                
+            }
+
+            scene.time.addEvent({
+                delay: 2000,
+                callback: () => scene.realignFood(scene,food)
+            })
             
         });
 
