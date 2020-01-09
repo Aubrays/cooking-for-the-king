@@ -1,0 +1,33 @@
+{
+  "name": "cooking_for_king",
+  "version": "1.0.0",
+  "description": "## Installation",
+  "main": "game.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aubrays/jv2d.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aubrays/jv2d/issues"
+  },
+  "homepage": "https://github.com/Aubrays/jv2d#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "phaser": "^3.21.0"
+  }
+}
