@@ -13,7 +13,7 @@ Mais aucune définition ne marche tout à fait.
 
 Wittgenstein : *le tractatus logico-philosophicus*
 Wittgenstein s'approche du Cercle de Vienne (revoir la philo, se poser les bonnes questions, les signifiantes), mais non. Un drôle de personnage.
-Un deuxième Wittgenstein, celui des tranchées, une réoritentation. Investigations philosophiques. Connues par les notes de ses étudiants.
+Un deuxième Wittgenstein, celui des tranchées, une réorientation. Investigations philosophiques. Connues par les notes de ses étudiants.
 
 ## Characteristics of games, livre avec Richard Garfield
 
@@ -61,3 +61,23 @@ Un peu mouvant...
 Arbre heuristique : progression dans l'apprentissage. Tutoriel : simulation du jeu de manière heureuse. Plaisir à être compétent! Années 80 : punitifs. Depuis l'apparition du casual gaming, bcp plus sympa.
 
 Reproche au jeu trop aléatoire : perdu ou gagné indépendamment de notre volonté.
+
+
+##  Différences ressources / monnaies
+
+Ressources pour construction / développement
+Monnaies pour les échanges.
+
+Parfois un élément fait partie des 2. Exemple : matériaux dans les Colons de Catane.
+
+Aspect calculatoire de type matriciel. Très vite complexe. Théorie de Nash.
+
+## Feedbacks
+
+positif : accroitre le phénomène
+négatif : décroissance du phénomène
+
+exemple de feedback négatif : boucle de balancement. Exemple : limité la taille de l'inventaire.
+
+## Conseils d'équilibrage
+Éviter les homeruns !
