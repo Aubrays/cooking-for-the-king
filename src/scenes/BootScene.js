@@ -15,6 +15,9 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('book', 'book.png');
         this.load.image('openBook', 'openBook.png');
 
+        // Atlas generated with http://free-tex-packer.com/
+        this.load.atlas('foods', 'food_dev.png', 'food_dev_atlas.json');
+
         this.load.spritesheet('cauldron', 'cauldron/cauldron_blue.png', {
             frameHeight: 339,
             frameWidth: 256
@@ -44,9 +47,12 @@ export default class BootScene extends Phaser.Scene {
         this.load.audio("page", "Misc_Paper_TurnPage_01.mp3");
         this.load.audio('theme', 'ambiance/Locations_Medieval_Tavern_Song.mp3');
 
-        // Various assets : fonts, json, etc.
+        // Various assets
         this.load.setPath('src/assets/');
         this.load.bitmapFont('augustaInk', 'fonts/augusta.png', 'fonts/augusta.fnt');
+
+
+
         this.load.json('foodData', 'json/foodData_dev.json');
         this.load.json('charData', 'json/charData.json');
         
