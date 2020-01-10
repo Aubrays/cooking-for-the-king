@@ -2,7 +2,8 @@ import Character from '../classes/Character';
 import Food from '../classes/Food';
 import LevelBanner from '../classes/LevelBanner';
 import ProgressBar from '../classes/ProgressBar';
-import levels from '../levels';
+import { getActualStat } from '../helpers/calcStats';
+import { levels } from '../levels';
 
 export default class PlayScene extends Phaser.Scene {
     constructor(){
@@ -15,7 +16,8 @@ export default class PlayScene extends Phaser.Scene {
         this.currentLevel = level;
     }
 
-    preload(){
+    preload()
+    {
         // Declarations of images (decoration only)
         this.background = this.add.image(300, 400, 'background');
 
@@ -95,8 +97,8 @@ export default class PlayScene extends Phaser.Scene {
             size: { w: 200, h: 20 },
             fill_color: 0xcc0000,
             border_color: 0x000000,
-            startValue: this.char.data.values.heatStart,
-            goalValue: this.char.data.values.heatEnd
+            startValue: this.char.data.values.healthStats.heatStart,
+            goalValue: this.char.data.values.healthStats.heatEnd
         });
         this.heatBar.updateProgressBar();
 
@@ -105,8 +107,8 @@ export default class PlayScene extends Phaser.Scene {
             size: { w: 200, h: 20 },
             fill_color: 0x0000cc,
             border_color: 0x000000,
-            startValue: this.char.data.values.moistnessStart,
-            goalValue: this.char.data.values.moistnessEnd
+            startValue: this.char.data.values.healthStats.moistnessStart,
+            goalValue: this.char.data.values.healthStats.moistnessEnd
         });
         this.moistBar.updateProgressBar();
 
@@ -117,6 +119,12 @@ export default class PlayScene extends Phaser.Scene {
             cost : 0
         }
 
+        // Initialize stats
+        this.actualMoistness = getActualStat(this, "moistness");
+        this.actualHeat = getActualStat(this, "heat");
+
+        console.log(this.actualMoistness, this.actualHeat);
+
         this.dragFood(this);
 
         this.physics.add.overlap(this.foods, this.cauldron, this.cauldronTouch, null, this);
@@ -124,7 +132,7 @@ export default class PlayScene extends Phaser.Scene {
     }
 
     update() {
-        // checkPos();
+
     }
 
     alignFood(scene) {
@@ -157,7 +165,8 @@ export default class PlayScene extends Phaser.Scene {
         })
 
         this.input.on('dragend', function(pointer, food){
-            if(food.x < config.width/2) {
+
+            if(food.x < scene.game.config.width/2) {
 
             // this.physics.moveTo(food, food.input.dragStartX, food.input.dragStartY, 5, 1000);
 
@@ -187,7 +196,6 @@ export default class PlayScene extends Phaser.Scene {
 
     cauldronTouch(cauldron, food) {
         food.disableBody(true, true);
-        console.log(food.getData('name'));
 
         // add sounds
         this.plop = this.sound.add("plop");
@@ -212,13 +220,13 @@ export default class PlayScene extends Phaser.Scene {
 
 
         // move gauges
+        this.actualMoistness = getActualStat(this, "moistness");
+        this.actualHeat = getActualStat(this, "heat");
 
-        let actualMoistness = this.char.data.values.moistnessStart + this.dish.moistness;
-
-        let actualHeat = this.char.data.values.heatStart + this.dish.heat;
-
-        this.heatBar.updateProgressBar(actualHeat);
-        this.moistBar.updateProgressBar(actualMoistness);
+        console.log(this.actualMoistness, this.actualHeat);
+        
+        this.heatBar.updateProgressBar(this.actualHeat);
+        this.moistBar.updateProgressBar(this.actualMoistness);
         this.checkVictory();
     }
 
@@ -234,10 +242,11 @@ export default class PlayScene extends Phaser.Scene {
 
 
     checkVictory(){
-        let actualMoistness = this.char.data.values.moistnessStart + this.dish.moistness;
-        let actualHeat = this.char.data.values.heatStart + this.dish.heat;
-        let goalMoistness = this.char.data.values.moistnessEnd;
-        let goalHeat = this.char.data.values.heatEnd;
+
+        let actualMoistness = this.actualMoistness;
+        let actualHeat = this.actualHeat;
+        let goalMoistness = this.char.data.values.healthStats.moistnessEnd;
+        let goalHeat = this.char.data.values.healthStats.heatEnd;
          // function to change character appearence according to state of health.
         function checkHealth(){
             // based on the difference between actual and goal values

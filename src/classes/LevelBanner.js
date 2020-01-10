@@ -33,30 +33,16 @@ export default class LevelBanner extends Phaser.GameObjects.Container {
   
       this.startTween();
     }
-  
-    // #FIXME
-    // tweensAsync = (config) => {
-    //   return new Promise(resolve => {
-    //     this.scene.tweens.add({
-    //       ...config,
-    //       onComplete: () => {
-    //         if (config.onComplete) config.onComplete()
-    //         resolve()
-    //       }
-    //     })
-    //   })
-    // }
-  
-    // async startTween() {
-    //   await this.tweensAsync({
-    //     targets: this,
-    //     scaleX: 1.5,
-    //     scaleY: 1.5,
-    //     yoyo: true,
-    //     delay: 1500,
-    //     duration: 300,
-    //     onComplete: () => console.log('tween 1 completed')
-    //   })
-    //  this.destroy();
-    // }
+
+    startTween(){
+      this.scene.tweens.add({
+        targets: this,
+        scaleX: 1.5,
+        scaleY: 1.5,
+        yoyo: true,
+        delay: 1500,
+        duration: 300,
+        onComplete: () => this.destroy()
+      })
+    }
   }

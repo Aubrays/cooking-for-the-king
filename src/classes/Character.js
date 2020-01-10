@@ -12,7 +12,5 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
         this.setData(dataObj);
 
         this.scene.add.existing(this);
-
     }
-
 }
