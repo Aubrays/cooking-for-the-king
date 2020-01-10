@@ -31,8 +31,36 @@ class PlayScene extends Phaser.Scene {
         this.cauldron = this.physics.add.sprite(450, 725, 'cauldron');
         this.cauldron.body.setSize(200, 20);
         this.cauldron.body.setOffset(60, 50);
+        this.book = this.add.sprite(100, 350, 'book').setInteractive();
+        this.book.setScale(0.2);
 
         this.foods = this.physics.add.group();
+
+        //Generates the recipe book container
+        this.openBook = this.add.image(0, 0, 'openBook');
+        this.openBook.setScale(0.2);
+        this.close = this.add.text(140, -90, 'X').setInteractive();
+        this.close.setTint(0xff0000);
+        this.text = this.add.text(20, -70, 'Recipe', { fontFamily: 'Verdana, Tahoma, serif' });
+        this.text.setTint(0x000000);
+        this.posY = this.text.y;
+        this.container = this.add.container(400, 300, [ this.openBook, this.text, this.close ]);
+        this.container.visible = false;
+
+        //opening and closing the book
+        this.book.on('pointerdown', function(){
+            if (this.container.visible == false){
+                this.page = this.sound.add("page");
+                this.page.play();
+            }
+            this.container.visible = true;
+        }, this);
+        this.close.on('pointerdown', function(){
+            this.container.visible = false;
+            this.page = this.sound.add("page");
+            this.page.play();
+        }, this);
+        
 
         // Generate foods for the level 1
         Phaser.Actions.Call(levelData.foods, function(food){
@@ -53,8 +81,7 @@ class PlayScene extends Phaser.Scene {
 
         this.dragFood();
 
-        this.char = new Character(this, levelData.char); // now just texture, not frame
-
+        this.char = new Character(this, levelData.char, 0);
 
         // Creation of the progress bars
         this.heatBar = new ProgressBar(this, {
@@ -96,6 +123,7 @@ class PlayScene extends Phaser.Scene {
         this.input.on('dragstart', function(pointer, food, dragX, dragY){
             food.body.setAllowGravity(false);
             food.setVelocity(0,0);
+            
         })
         
         this.input.on('drag', function(pointer, food, dragX, dragY){
@@ -103,27 +131,26 @@ class PlayScene extends Phaser.Scene {
             food.y = dragY;
         })
 
-        this.input.on('dragend', function(pointer, food, dropped){
-        if(food.x < config.width/2) {
+        this.input.on('dragend', function(pointer, food){
+            if(food.x < config.width/2) {
 
             // this.physics.moveTo(food, food.input.dragStartX, food.input.dragStartY, 5, 1000);
 
             // position y == height of shelf => return in shelf
             // food.input.dragStartX vs food.x
-            if (!dropped)
-            {
+            
                 food.x = food.input.dragStartX;
                 food.y = food.input.dragStartY;
-            }
+            
 
-        } else {
-            food.body.setAllowGravity(true);
-            food.setGravity(0, 3000);
-            food.setCollideWorldBounds(true);
-            food.setBounce(0.5);
-        }
+            } else {
+                food.body.setAllowGravity(true);
+                food.setGravity(0, 3000);
+                food.setCollideWorldBounds(true);
+                food.setBounce(0.5);
+                }
+            
         });
-
 
     }
 
@@ -134,8 +161,8 @@ class PlayScene extends Phaser.Scene {
         // add sounds
         this.plop = this.sound.add("plop");
         this.plop.play();
-        this.plop = this.sound.add("splash");
-        this.plop.play();
+        this.splash = this.sound.add("splash");
+        this.splash.play();
 
         // add to the dish
 
@@ -146,6 +173,13 @@ class PlayScene extends Phaser.Scene {
 
 
         // write in the recipe
+        this.posY += 20;
+        this.recipe = this.add.text(30, this.posY, "- " + food.getData('name'));
+        this.recipe.setTint(0x000000);
+        this.container.add(this.recipe);
+        
+
+
         // move gauges
 
         let actualMoistness = this.char.data.values.moistnessStart + this.dish.moistness;
@@ -169,14 +203,34 @@ class PlayScene extends Phaser.Scene {
 
 
     checkVictory(){
-        // TODO : same variables are repeated in this.cauldronTouch()
         let actualMoistness = this.char.data.values.moistnessStart + this.dish.moistness;
-
         let actualHeat = this.char.data.values.heatStart + this.dish.heat;
-
         let goalMoistness = this.char.data.values.moistnessEnd;
         let goalHeat = this.char.data.values.heatEnd;
-
+         // function to change character appearence according to state of health.
+        function checkHealth(){
+            // based on the difference between actual and goal values
+            let diff = ((Math.abs(actualMoistness - goalMoistness))
+                        + (Math.abs(actualHeat - goalHeat)))
+            console.log(diff)
+            // return a value which will correspond to a certain frame
+            // TODO: adjust values so this works better
+            if (diff > 8){
+                // this for the worst state
+                return 0
+                }
+            else if (8 > diff && diff > 4){
+                // this for medium
+                return 1
+                }
+            else if (4 > diff && diff > 0){
+                // this for doing well
+                return 2
+                }
+            }
+            console.log("health: " + checkHealth())
+            // then assign the value from checkHealth to frame in char
+            this.char.setFrame(checkHealth())
         if(actualMoistness == goalMoistness &&
             actualHeat == goalHeat) {
                 this.time.addEvent({
@@ -210,6 +264,8 @@ class PlayScene extends Phaser.Scene {
         })
         
     }
+
+    
 }
 
 
