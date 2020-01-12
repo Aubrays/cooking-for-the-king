@@ -2,6 +2,9 @@
 
 import Phaser from 'phaser';
 
+// Import plugins
+import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin';
+
 // Import scenes
 import BootScene from './scenes/BootScene';
 import MenuScene from './scenes/MenuScene'
@@ -21,7 +24,14 @@ const config = {
             debug: true
         }
     },
-    scene: [BootScene, MenuScene, OptionsScene, PlayScene]
+    scene: [BootScene, MenuScene, OptionsScene, PlayScene],
+    plugins: {
+        scene: [{
+            key: 'rexUI',
+            plugin : RexUIPlugin,
+            mapping: 'rexUI'
+        }]
+    }
 };
 
 let game = new Phaser.Game(config);

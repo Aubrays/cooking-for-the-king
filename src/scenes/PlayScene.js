@@ -73,6 +73,9 @@ export default class PlayScene extends Phaser.Scene {
 
         this.levelText = new LevelBanner(this, this.currentLevel);
 
+        
+
+
         this.foods = this.physics.add.group();
 
         // Generate foods for the level 1
@@ -85,11 +88,28 @@ export default class PlayScene extends Phaser.Scene {
 
         this.alignFood(this);
 
-
-
-        
-
         this.char = new Character(this, levelData.char, 0);
+
+        let textScene = this.char.data.values.dialogue;
+
+        if(this.currentLevel === 0){
+            // #TODO : DRY!
+            this.createTextBox(this, 300, 150, {
+                wrapWidth: 200,
+                fixedWidth: 250,
+                fixedHeight: 150,
+            })
+            .start(textScene, 100);
+        }
+
+        this.char.setInteractive()
+        .on('pointerdown', function(pointer, localX, localY, event){
+            this.scene.createTextBox(this.scene, 300, 150, {
+            wrapWidth: 200,
+        })
+        .start(textScene, 50);
+        this.disableInteractive();
+        });
 
         // Creation of the progress bars
         this.heatBar = new ProgressBar(this, {
@@ -134,6 +154,84 @@ export default class PlayScene extends Phaser.Scene {
     update() {
 
     }
+
+    
+    createTextBox(scene, x, y, config) {
+        let wrapWidth = Phaser.Utils.Objects.GetValue(config, 'wrapWidth', 0);
+        let fixedWidth = Phaser.Utils.Objects.GetValue(config, 'fixedWidth', 0);
+        let fixedHeight = Phaser.Utils.Objects.GetValue(config, 'fixedHeight', 0);
+        let textBox = scene.rexUI.add.textBox({
+            x: x,
+            y: y,
+
+            background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, '0x4e342e')
+                .setStrokeStyle(2, '0x7b5e57'),
+
+            text: scene.getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
+            // text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
+
+
+            action: scene.add.image(0, 0, 'nextPage').setTint('0x7b5e57').setVisible(false),
+
+            space: {
+                left: 20,
+                right: 20,
+                top: 20,
+                bottom: 20,
+                icon: 0,
+                text: 10,
+            }
+        })
+        .setOrigin(0)
+        .layout();
+
+        textBox
+        .setInteractive()
+        .on('pointerdown', function () {
+            var icon = this.getElement('action').setVisible(false);
+            this.resetChildVisibleState(icon);
+            if (this.isTyping) {
+                this.stop(true);
+            } else {
+                this.typeNextPage();
+            }
+        }, textBox)
+        .on('pageend', function () {
+            if (this.isLastPage) {
+                this.on('pointerdown', function(pointer, localX, localY, event){
+                    this.destroy();
+                    scene.char.setInteractive();
+                })
+                return;
+            }
+
+            var icon = this.getElement('action').setVisible(true);
+            this.resetChildVisibleState(icon);
+            icon.y -= 30;
+            var tween = scene.tweens.add({
+                targets: icon,
+                y: '+=30', // '+=100'
+                ease: 'Bounce', // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 500,
+                repeat: 0, // -1: infinity
+                yoyo: false
+            });
+        }, textBox)
+    //.on('type', function () {
+    //})
+    return textBox;
+}
+
+getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight) {
+    return scene.add.text(0, 0, '', {
+            fontSize: '20px',
+            wordWrap: {
+                width: wrapWidth
+            },
+            maxLines: 5
+        })
+        .setFixedSize(fixedWidth, fixedHeight);
+}
 
     alignFood(scene) {
         Phaser.Actions.GridAlign(scene.foods.getChildren(), {
