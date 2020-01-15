@@ -1,0 +1,30 @@
+{
+    "chars" : [
+        {
+            "name" : "Mélisende",
+            "imageName" : "char1",
+            "healthStats":
+                {
+                    "heatStart" : -3,
+                    "moistnessStart" : 2,
+                    "heatEnd" : 0,
+                    "moistnessEnd" : 0
+                },
+            "wealth" : 10,
+            "dialogue" : "Je suis un peu malade. Le médecin m'a dit de manger du poireau. Celui-ci est chaud et sec. Ma complexion sera alors à nouveau à l'équilibre."
+        },
+        {
+            "name" : "Charles",
+            "imageName": "char2",
+            "healthStats":
+                {
+                    "heatStart" : -2,
+                    "moistnessStart" : -2,
+                    "heatEnd" : 4,
+                    "moistnessEnd" : 1
+                },
+            "wealth" : 20,
+            "dialogue": "dialogue 2"
+        }
+    ]
+}
