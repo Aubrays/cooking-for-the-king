@@ -8,12 +8,30 @@ export default class BootScene extends Phaser.Scene {
     {
         // Images, atlas and spritesheets assets
         this.load.setPath('src/assets/sprites/');
-        this.load.image('background', 'background.jpg');
         this.load.image('banner', 'GUI/banner.png');
         this.load.image('bannerParchment', 'GUI/bannerParchment.png');
+        this.load.image('parchment', 'GUI/parchment.png');
+        this.load.image('menuBox', 'GUI/mediumModalBox.png');
+        this.load.image('lightButton', 'GUI/redButton.png');
+        this.load.image('darkButton', 'GUI/darkRedButton.png');
+        this.load.image('bigLightButton', 'GUI/bigRedButton.png');
+        this.load.image('bigDarkButton', 'GUI/bigDarkRedButton.png');
+        this.load.image('containerBar', 'GUI/containerBar.png');
+        this.load.image('cursorBar', 'GUI/cursorBar.png');
+        this.load.image('yellowCursorBar', 'GUI/yellowCursorBar.png');
+        this.load.image('roundContainer', 'GUI/roundContainer.png');
+        this.load.image('redBar', 'GUI/redBar.png');
+        this.load.image('blueBar', 'GUI/blueBar.png');
+        this.load.image('yellowBar', 'GUI/yellowBar.png');
+        this.load.image('background', 'background.jpg');
         this.load.image('shelf', 'shelf.png');
         this.load.image('book', 'book.png');
         this.load.image('openBook', 'openBook.png');
+        this.load.image('fire', 'elements/fire.png');
+        this.load.image('snowflake', 'elements/snowflake.png');
+        this.load.image('drop', 'elements/drop.png');
+        this.load.image('dust', 'elements/dust.png');
+        
 
         // Atlas generated with http://free-tex-packer.com/
         this.load.atlas('foods', 'food_dev.png', 'food_dev_atlas.json');
@@ -50,6 +68,7 @@ export default class BootScene extends Phaser.Scene {
         // Various assets
         this.load.setPath('src/assets/');
         this.load.bitmapFont('augustaInk', 'fonts/augusta.png', 'fonts/augusta.fnt');
+        this.load.bitmapFont('augusta', 'fonts/augustaWhite.png', 'fonts/augustaWhite.fnt');
 
 
 
@@ -63,7 +82,7 @@ export default class BootScene extends Phaser.Scene {
         this.music = this.sound.add("theme");
 
         let musicConfig = {
-            mute: true, //Unmute if necessary. Thank you for my ears. d(^_^)b
+            mute: false, //Unmute if necessary. Thank you for my ears. d(^_^)b
             volume: 0.3,
             rate: 1,
             detune: 0,
@@ -78,7 +97,7 @@ export default class BootScene extends Phaser.Scene {
         this.music = this.sound.add("fire");
 
         let fireConfig = {
-            mute: true, 
+            mute: false, 
             volume: 0.7,
             rate: 1,
             detune: 0,

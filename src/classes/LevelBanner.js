@@ -32,17 +32,20 @@ export default class LevelBanner extends Phaser.GameObjects.Container {
       scene.add.existing(this);
   
       this.startTween();
+
     }
 
     startTween(){
-      this.scene.tweens.add({
+      let tween = this.scene.tweens.add({
         targets: this,
         scaleX: 1.5,
         scaleY: 1.5,
         yoyo: true,
         delay: 1500,
         duration: 300,
-        onComplete: () => this.destroy()
+        onComplete: () => {
+          this.destroy();
+        }
       })
     }
   }

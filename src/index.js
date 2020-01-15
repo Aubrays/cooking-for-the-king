@@ -21,17 +21,17 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true
+            debug: false
         }
     },
-    scene: [BootScene, MenuScene, OptionsScene, PlayScene],
     plugins: {
         scene: [{
             key: 'rexUI',
             plugin : RexUIPlugin,
             mapping: 'rexUI'
         }]
-    }
+    },
+    scene: [BootScene, MenuScene, OptionsScene, PlayScene],
 };
 
 let game = new Phaser.Game(config);

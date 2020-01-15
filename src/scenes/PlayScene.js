@@ -4,6 +4,8 @@ import LevelBanner from '../classes/LevelBanner';
 import ProgressBar from '../classes/ProgressBar';
 import { getActualStat } from '../helpers/calcStats';
 import { levels } from '../levels';
+import RoundRectangle from 'phaser3-rex-plugins/templates/ui/roundrectangle/Factory';
+import { Tilemaps } from 'phaser';
 
 export default class PlayScene extends Phaser.Scene {
     constructor(){
@@ -21,6 +23,7 @@ export default class PlayScene extends Phaser.Scene {
         // Declarations of images (decoration only)
         this.background = this.add.image(300, 400, 'background');
 
+
         // Declarations of sprites (for physics)
         this.shelf = this.physics.add.sprite(100, 550, 'shelf');
         this.cauldron = this.physics.add.sprite(475, 700, 'cauldron');
@@ -29,19 +32,23 @@ export default class PlayScene extends Phaser.Scene {
     // Restarted at each level
     create ()
     {
-        this.physics.world.setBoundsCollision(true, true, true, true);
 
+        
+        
+        // Elements of configuration
+        this.physics.world.setBoundsCollision(true, true, true, true);
         let levelData = levels[this.currentLevel];
 
         // Declarations of data
         this.foodData = this.cache.json.get('foodData');
         this.charData = this.cache.json.get('charData');
-        
+
+        // Animation of the cauldron        
         this.cauldron.play('cauldron_anim');
         this.cauldron.body.setSize(175, 40);
         this.cauldron.body.setOffset(40, 100);
 
-
+        // The recipe book
         this.book = this.add.sprite(100, 350, 'book').setInteractive();
         this.book.setScale(0.2);
 
@@ -71,66 +78,82 @@ export default class PlayScene extends Phaser.Scene {
         }, this);
         
 
-        this.levelText = new LevelBanner(this, this.currentLevel);
+
 
         
 
-
+        // Generate foods
         this.foods = this.physics.add.group();
-
-        // Generate foods for the level 1
         Phaser.Actions.Call(levelData.foods, function(food){
             let new_food = new Food(this, "foods", food);
             this.foods.add(new_food);
         }, this);
-
-        // this.foods.setCollideWorldBounds(true, 0.75);
-
         this.alignFood(this);
 
+        // Character elements
         this.char = new Character(this, levelData.char, 0);
-
+        this.char.setDepth(30);
         let textScene = this.char.data.values.dialogue;
-
+        
         if(this.currentLevel === 0){
-            // #TODO : DRY!
-            this.createTextBox(this, 300, 150, {
-                wrapWidth: 200,
-                fixedWidth: 250,
-                fixedHeight: 150,
-            })
-            .start(textScene, 100);
+            this.addDialogue(this, textScene);
+        } else {
+            this.levelText = new LevelBanner(this, this.currentLevel);
         }
 
         this.char.setInteractive()
         .on('pointerdown', function(pointer, localX, localY, event){
-            this.scene.createTextBox(this.scene, 300, 150, {
-            wrapWidth: 200,
-        })
-        .start(textScene, 50);
-        this.disableInteractive();
+            this.scene.addDialogue(this.scene, textScene);
+
+            this.disableInteractive();
         });
+
+
 
         // Creation of the progress bars
         this.heatBar = new ProgressBar(this, {
-            pos: { x: 100, y: 40 },
-            size: { w: 200, h: 20 },
-            fill_color: 0xcc0000,
-            border_color: 0x000000,
+            pos: { x: 100, y: 20 },
+            colorBar: 'redBar',
+            // border_color: 0x000000,
             startValue: this.char.data.values.healthStats.heatStart,
             goalValue: this.char.data.values.healthStats.heatEnd
         });
         this.heatBar.updateProgressBar();
 
+        this.coldMedal = this.add.container(35, 35);
+        this.coldContainer = this.add.image(0,0, 'roundContainer').setScale(0.5);
+        this.coldLogo = this.add.image(0,0, 'snowflake').setScale(0.3);
+        this.coldMedal.add(this.coldContainer);
+        this.coldMedal.add(this.coldLogo);
+
+        this.heatMedal = this.add.container(375, 35);
+        this.heatContainer = this.add.image(0,0, 'roundContainer').setScale(0.5);
+        this.heatLogo = this.add.image(0,0, 'fire').setScale(0.3);
+        this.heatMedal.add(this.heatContainer);
+        this.heatMedal.add(this.heatLogo);
+
         this.moistBar = new ProgressBar (this, {
-            pos: { x: 100, y: 80 },
-            size: { w: 200, h: 20 },
-            fill_color: 0x0000cc,
-            border_color: 0x000000,
+            pos: { x: 100, y: 50 },
+            colorBar: 'blueBar',
+            // border_color: 0x000000,
             startValue: this.char.data.values.healthStats.moistnessStart,
             goalValue: this.char.data.values.healthStats.moistnessEnd
         });
         this.moistBar.updateProgressBar();
+
+        this.dryMedal = this.add.container(35, 100);
+        this.dryContainer = this.add.image(0,0, 'roundContainer').setScale(0.5);
+        this.dryLogo = this.add.image(0,0, 'dust').setScale(0.25);
+        this.dryMedal.add(this.dryContainer);
+        this.dryMedal.add(this.dryLogo);
+
+        this.moistMedal = this.add.container(375, 100);
+        this.moistContainer = this.add.image(0,0, 'roundContainer').setScale(0.5);
+        this.moistLogo = this.add.image(0,0, 'drop').setScale(0.3);
+        this.moistMedal.add(this.moistContainer);
+        this.moistMedal.add(this.moistLogo);
+
+
 
         this.dish = {
             foods : [],
@@ -143,16 +166,23 @@ export default class PlayScene extends Phaser.Scene {
         this.actualMoistness = getActualStat(this, "moistness");
         this.actualHeat = getActualStat(this, "heat");
 
-        console.log(this.actualMoistness, this.actualHeat);
-
+        // Game actions
         this.dragFood(this);
-
         this.physics.add.overlap(this.foods, this.cauldron, this.cauldronTouch, null, this);
 
     }
 
     update() {
 
+    }
+
+    addDialogue(context, textScene) {
+        context.createTextBox(this, 300, 150, {
+            wrapWidth: 250,
+            fixedWidth: 250,
+            fixedHeight: 150,
+        })
+        .start(textScene, 100);
     }
 
     
@@ -163,33 +193,26 @@ export default class PlayScene extends Phaser.Scene {
         let textBox = scene.rexUI.add.textBox({
             x: x,
             y: y,
-
-            background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, '0x4e342e')
-                .setStrokeStyle(2, '0x7b5e57'),
-
+            background: scene.add.image(0, 0, 'parchment'),
             text: scene.getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
-            // text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
-
-
-            action: scene.add.image(0, 0, 'nextPage').setTint('0x7b5e57').setVisible(false),
-
             space: {
                 left: 20,
                 right: 20,
                 top: 20,
                 bottom: 20,
                 icon: 0,
-                text: 10,
+                text: 0,
             }
         })
         .setOrigin(0)
+        .setDepth(30)
         .layout();
 
-        textBox
-        .setInteractive()
+        scene.displayShadow(scene, true);
+
+
+        textBox.setInteractive()
         .on('pointerdown', function () {
-            var icon = this.getElement('action').setVisible(false);
-            this.resetChildVisibleState(icon);
             if (this.isTyping) {
                 this.stop(true);
             } else {
@@ -200,38 +223,38 @@ export default class PlayScene extends Phaser.Scene {
             if (this.isLastPage) {
                 this.on('pointerdown', function(pointer, localX, localY, event){
                     this.destroy();
+                    scene.displayShadow(scene,false);
                     scene.char.setInteractive();
                 })
                 return;
             }
-
-            var icon = this.getElement('action').setVisible(true);
-            this.resetChildVisibleState(icon);
-            icon.y -= 30;
-            var tween = scene.tweens.add({
-                targets: icon,
-                y: '+=30', // '+=100'
-                ease: 'Bounce', // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                duration: 500,
-                repeat: 0, // -1: infinity
-                yoyo: false
-            });
         }, textBox)
-    //.on('type', function () {
-    //})
     return textBox;
 }
 
-getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight) {
-    return scene.add.text(0, 0, '', {
-            fontSize: '20px',
-            wordWrap: {
-                width: wrapWidth
-            },
-            maxLines: 5
-        })
-        .setFixedSize(fixedWidth, fixedHeight);
-}
+    getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight) {
+        return scene.add.text(0, 0, '', {
+                fontSize: '20px',
+                color : '#000',
+                wordWrap: {
+                    width: wrapWidth
+                },
+                maxLines: 5
+            })
+            .setFixedSize(fixedWidth, fixedHeight);
+    }
+
+    displayShadow(scene, bool) {
+        if(bool === true){
+            scene.shadow = scene.add.graphics();
+            scene.shadow.fillStyle(0x000000, 0.75);
+            scene.shadow.fillRect(0, 0, 600, 800);
+            scene.shadow.setDepth(20);
+        }
+        else {
+            scene.shadow.setAlpha(0);
+        }
+    }
 
     alignFood(scene) {
         Phaser.Actions.GridAlign(scene.foods.getChildren(), {
@@ -321,7 +344,7 @@ getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight) {
         this.actualMoistness = getActualStat(this, "moistness");
         this.actualHeat = getActualStat(this, "heat");
 
-        console.log(this.actualMoistness, this.actualHeat);
+        console.log('actual situation moist/heat: ' + this.actualMoistness, this.actualHeat);
         
         this.heatBar.updateProgressBar(this.actualHeat);
         this.moistBar.updateProgressBar(this.actualMoistness);

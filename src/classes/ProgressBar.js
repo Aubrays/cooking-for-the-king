@@ -1,4 +1,4 @@
-export default class ProgressBar extends Phaser.GameObjects.Graphics {
+export default class ProgressBar extends Phaser.GameObjects.Container {
 
     // Sketch
     // -4  -3  -2  -1   0   1   2   3   4
@@ -10,69 +10,35 @@ export default class ProgressBar extends Phaser.GameObjects.Graphics {
 
         let configBar = options;
 
-        this.x = configBar.pos.x/2; // Must divided by 2 for an unknown reason...
-        this.y = configBar.pos.y/2; // Must divided by 2 for an unknown reason...
-        this.w = configBar.size.w;
-        this.z = configBar.size.h;
-        this.defaultFillColor = configBar.fill_color;
-        this.defaultFillAlpha = 0.7;
-        this.defaultStrokeColor = configBar.border_color;
+        this.x = configBar.pos.x; // Must divided by 2 for an unknown reason...
+        this.y = configBar.pos.y; // Must divided by 2 for an unknown reason...
+        this.colorBar = configBar.colorBar;
         this.startValue = configBar.startValue;
         this.goalValue = configBar.goalValue;
         this.state = 'created';
 
-        let borderOffset = 1;
+        
+        let barContainer = scene.add.sprite(this.x, this.y, 'containerBar').setScale(0.7);
+        let bar = scene.add.sprite(barContainer.x, (barContainer.y)-2, this.colorBar).setScale(0.7).setDepth(5);
+        this.barMask = scene.add.sprite(bar.x+90, bar.y*2+2, 'yellowBar').setScale(0.7).setDepth(10);
+        this.barMask.visible = false;
 
-        let borderRect = new Phaser.Geom.Rectangle(
-            this.x*2 - borderOffset,
-            this.y*2 - borderOffset,
-            this.w + borderOffset * 2,
-            this.z + borderOffset * 2
-        );
+        this.initBarMaskX = this.barMask.x;
+        this.stepWidth = this.barMask.displayWidth / 8;
+        bar.mask = new Phaser.Display.Masks.BitmapMask(scene, this.barMask);
 
-        let border = scene.add.graphics({
-            lineStyle: {
-                width: 2,
-                color: this.defaultStrokeColor
-            }
-        });
-        border.strokeRectShape(borderRect);
+        
+        let cursorX = (this.goalValue+5) * this.stepWidth + 5;
 
+        console.log('barContainer.x: ' + barContainer.x);
+        console.log('barMask.x: ' + this.barMask.x);
+        console.log('cursorX: ' + cursorX);
 
-        let goalStroke = new Phaser.Geom.Line(
-            ((this.goalValue + 4) / 8) * this.w + this.x*2 - borderOffset*2,
-            this.y*2,
-            ((this.goalValue + 4) / 8) * this.w + this.x*2 - borderOffset*2,
-            this.y*2 + this.z
-        );
+        let goalCursor = scene.add.sprite(cursorX, this.barMask.y, 'yellowCursorBar').setScale(0.7).setDepth(15);
 
-        let goal = scene.add.graphics({
-            lineStyle: {
-                color: 0x00cc00,
-                width: 4
-            }
-        });
-        goal.strokeLineShape(goalStroke);
-        goal.setDepth(100); // Same as z-index
-
-        let scale = scene.add.graphics({
-            lineStyle: {
-                color: 0x333333,
-                width: 2,
-                alpha: 0.5
-            }
-        });
-        scale.setDepth(90);
-
-        for(let rank = 1; rank < 8; rank++){
-            let scaleStroke = new Phaser.Geom.Line(
-                rank/8 * this.w + this.x*2 - borderOffset ,
-                this.y*2,
-                rank/8 * this.w + this.x*2 - borderOffset,
-                this.y*2 + this.z
-            );
-            scale.strokeLineShape(scaleStroke);
-        }
+        this.add(barContainer);
+        this.add(bar);
+        
 
         scene.add.existing(this);
     }
@@ -82,11 +48,10 @@ export default class ProgressBar extends Phaser.GameObjects.Graphics {
         if(this.state == 'created'){
             value = this.startValue;
         }
-        let percentage = (value + 4) / 8;
-
-        this.clear();
-        this.fillStyle( this.defaultFillColor, this.defaultFillAlpha );
-        this.fillRect( this.x, this.y, percentage * this.w , this.z);
+    
+        let nbStep = (4-value);
+        let totalStepValue = this.stepWidth * nbStep;
+        this.barMask.x = this.initBarMaskX - totalStepValue;
         this.setState('updated');
     }
 }
