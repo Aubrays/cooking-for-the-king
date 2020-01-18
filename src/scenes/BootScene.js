@@ -48,10 +48,10 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('Charles', 'chars/char2.png',
                                 {frameWidth:600,
                                 frameHeight:600});
-        this.load.image('Gunièvre', 'chars/char3.png',
+        this.load.spritesheet('Gunièvre', 'chars/char3.png',
                                 {frameWidth:600,
                                 frameHeight:600});
-        this.load.image('Loïc', 'chars/char4.png',
+        this.load.spritesheet('Loïc', 'chars/char4.png',
                                 {frameWidth:600,
                                 frameHeight:600});
 

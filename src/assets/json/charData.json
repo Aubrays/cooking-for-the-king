@@ -18,13 +18,26 @@
             "imageName": "char2",
             "healthStats":
                 {
-                    "heatStart" : -2,
-                    "moistnessStart" : -2,
-                    "heatEnd" : 4,
+                    "heatStart" : -4,
+                    "moistnessStart" : 3,
+                    "heatEnd" : 1,
                     "moistnessEnd" : 1
                 },
             "wealth" : 20,
             "dialogue": "dialogue 2"
+        },
+        {
+            "name" : "Gunièvre",
+            "imageName": "char3",
+            "healthStats":
+            {
+                "heatStart" : 2,
+                "moistnessStart" : 2,
+                "heatEnd" : -2,
+                "moistnessEnd" : -2
+            },
+            "wealth" : 30,
+            "dialogue": "dialogue 3"
         }
     ]
 }

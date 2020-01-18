@@ -262,7 +262,7 @@ export default class PlayScene extends Phaser.Scene {
             height: 10,
             cellWidth: 32,
             cellHeight: 32,
-            x: 100,
+            x: 50,
             y: 550
         });
     }
@@ -384,7 +384,7 @@ export default class PlayScene extends Phaser.Scene {
                 // this for medium
                 return 1
                 }
-            else if (4 > diff && diff > 0){
+            else if (4 > diff){
                 // this for doing well
                 return 2
                 }
@@ -416,6 +416,11 @@ export default class PlayScene extends Phaser.Scene {
         }
 
         if(actualHeat <= -4 || actualHeat >= 4) {
+            this.cameras.main.shake(500, 0.025)
+            this.time.addEvent({
+                delay: 1500,
+                callback: () => this.scene.restart()
+            })
             console.log("Defheat !")
         }
     }

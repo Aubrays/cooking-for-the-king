@@ -48,6 +48,11 @@ export default class ProgressBar extends Phaser.GameObjects.Container {
         if(this.state == 'created'){
             value = this.startValue;
         }
+
+        (value < -4 ? value = -4 : value); 
+        (value > 4 ? value = 4 : value);
+
+        console.log('input value: ' + value);
     
         let nbStep = (4-value);
         let totalStepValue = this.stepWidth * nbStep;
