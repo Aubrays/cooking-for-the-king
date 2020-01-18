@@ -7,7 +7,7 @@ export default class BootScene extends Phaser.Scene {
     preload ()
     {
         // Images, atlas and spritesheets assets
-        this.load.setPath('src/assets/sprites/');
+        this.load.setPath('assets/sprites/');
         this.load.image('banner', 'GUI/banner.png');
         this.load.image('bannerParchment', 'GUI/bannerParchment.png');
         this.load.image('parchment', 'GUI/parchment.png');
@@ -56,7 +56,7 @@ export default class BootScene extends Phaser.Scene {
                                 frameHeight:600});
 
         // Sound assets
-        this.load.setPath('src/assets/sounds/');
+        this.load.setPath('assets/sounds/');
         this.load.audio("plop", "plop_01.mp3");
         this.load.audio("splash", "splash_01.wav");
         this.load.audio("fire", "Home_Office_Fireplace_01.mp3");
@@ -66,7 +66,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.audio('theme', 'ambiance/Locations_Medieval_Tavern_Song.mp3');
 
         // Various assets
-        this.load.setPath('src/assets/');
+        this.load.setPath('assets/');
         this.load.bitmapFont('augustaInk', 'fonts/augusta.png', 'fonts/augusta.fnt');
         this.load.bitmapFont('augusta', 'fonts/augustaWhite.png', 'fonts/augustaWhite.fnt');
 
