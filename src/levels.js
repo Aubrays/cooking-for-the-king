@@ -12,5 +12,14 @@ const level2 = {
     ],
     char : 'Charles'
 }
+const level3 = {
+    foods:[
+        'leek',
+        'bread',
+        'onion',
+        'date'
+    ],
+    char: 'Gunièvre'
+}
 
-export const levels = [level1, level2];
+export const levels = [level1, level2, level3];

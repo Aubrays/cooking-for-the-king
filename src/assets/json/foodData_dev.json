@@ -11,6 +11,16 @@
             "heat" : 2,
             "moistness" : 0,
             "price" : 4
+        },
+          {  "name": "onion",
+            "heat": 4,
+            "moistness": 3,
+            "price": 2
+          },
+          {  "name": "date",
+            "heat": -2,
+            "moistness": -2,
+            "price": 5
         }
     ]
 }
