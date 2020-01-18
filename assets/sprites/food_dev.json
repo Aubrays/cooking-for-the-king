@@ -50,7 +50,28 @@
 						"w": 21,
 						"h": 20
 					}
+				},{
+					"filename": "onion.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize":{
+						"w": 24,
+						"h": 24,
+					},
+					"spriteSourceSize":{
+						"x": 16,
+						"y": 16,
+						"w": 20,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 48,
+						"w": 21,
+						"h": 20
+					}
 				}
+
 			]
 		}
 	],

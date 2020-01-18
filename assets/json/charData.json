@@ -10,11 +10,19 @@
         },
         {
             "name" : "Charles",
-            "heatStart" : -2,
-            "moistnessStart" : -2,
-            "heatEnd" : 4,
+            "heatStart" : -4,
+            "moistnessStart" : 3,
+            "heatEnd" : 1,
             "moistnessEnd" : 1,
             "wealth" : 20
+        },
+        {
+            "name" : "Gunièvre",
+            "heatStart" : 2,
+            "moistnessStart" : 2,
+            "heatEnd": -2,
+            "moistnessEnd" : -2,
+            "wealth" : 30
         }
     ]
 }

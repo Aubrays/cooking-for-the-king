@@ -75,7 +75,7 @@ class PlayScene extends Phaser.Scene {
             height: 10,
             cellWidth: 32,
             cellHeight: 32,
-            x: 100,
+            x: 50,
             y: 550
         });
 
@@ -223,7 +223,7 @@ class PlayScene extends Phaser.Scene {
                 // this for medium
                 return 1
                 }
-            else if (4 > diff && diff > 0){
+            else if (4 > diff){
                 // this for doing well
                 return 2
                 }
