@@ -9,15 +9,13 @@
 
 ## Build the project
 
-To build the project for deploiement in production, use ```npm build```. This will create a minified and optimized file in ```dist/```.
+To build the project, use ```npm run build```. This will create all necessary files in ```dist/```.
 
 ## Coding style
 
 Add your files in ```src/```.
 
 Use the ES6 syntax for import/export and classes.
-
-Coming soon : ESlint to improve our code.
 
 ## Context of the creation
 
