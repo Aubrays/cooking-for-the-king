@@ -25,7 +25,7 @@ export default class PlayScene extends Phaser.Scene {
 
 
         // Declarations of sprites (for physics)
-        this.shelf = this.physics.add.sprite(100, 550, 'shelf');
+        this.shelf = this.physics.add.sprite(150, 550, 'shelf');
         this.cauldron = this.physics.add.sprite(475, 700, 'cauldron');
     }
 
@@ -49,18 +49,22 @@ export default class PlayScene extends Phaser.Scene {
         this.cauldron.body.setOffset(40, 100);
 
         // The recipe book
-        this.book = this.add.sprite(100, 350, 'book').setInteractive();
+        this.book = this.add.sprite(130, 380, 'book').setInteractive();
         this.book.setScale(0.2);
 
         //Generates the recipe book container
         this.openBook = this.add.image(0, 0, 'openBook');
         this.openBook.setScale(0.2);
-        this.close = this.add.text(140, -90, 'X').setInteractive();
+        this.close = this.add.text(140, -90, 'X', { fontFamily: 'Verdana' }).setInteractive();
         this.close.setTint(0xff0000);
-        this.text = this.add.text(20, -70, 'Recipe', { fontFamily: 'Verdana, Tahoma, serif' });
+        //this.text = this.add.text(20, -70, 'Recette:', { fontFamily: 'Verdana, Tahoma, serif' });
+        this.text = this.add.bitmapText(20, -80, 'augusta', 'Recette', 40, 1);
         this.text.setTint(0x000000);
-        this.posY = this.text.y;
-        this.container = this.add.container(400, 300, [ this.openBook, this.text, this.close ]);
+        this.posY = this.text.y + 20;
+        this.info = this.add.text(-140, -70, 'Ceci est un/e: ', { fontFamily: 'Verdana, Tahoma, serif' });
+        this.info.visible = false;
+        this.info.setTint(0x000000);
+        this.container = this.add.container(400, 300, [ this.openBook, this.text, this.close, this.info ]);
         this.container.visible = false;
 
         //opening and closing the book
@@ -68,13 +72,14 @@ export default class PlayScene extends Phaser.Scene {
             if (this.container.visible == false){
                 this.page = this.sound.add("page");
                 this.page.play();
+                this.container.visible = true;
+            } else if (this.container.visible == true){
+                this.container.visible = false;
             }
-            this.container.visible = true;
+            
         }, this);
         this.close.on('pointerdown', function(){
             this.container.visible = false;
-            this.page = this.sound.add("page");
-            this.page.play();
         }, this);
         
 
@@ -262,8 +267,8 @@ export default class PlayScene extends Phaser.Scene {
             height: 10,
             cellWidth: 32,
             cellHeight: 32,
-            x: 50,
-            y: 550
+            x: 70,
+            y: 520
         });
     }
 

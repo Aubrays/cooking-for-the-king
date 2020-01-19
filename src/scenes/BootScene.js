@@ -24,7 +24,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('blueBar', 'GUI/blueBar.png');
         this.load.image('yellowBar', 'GUI/yellowBar.png');
         this.load.image('background', 'background.jpg');
-        this.load.image('shelf', 'shelf.png');
+        this.load.image('shelf', 'food_shelf.png');
         this.load.image('book', 'book.png');
         this.load.image('openBook', 'openBook.png');
         this.load.image('fire', 'elements/fire.png');
