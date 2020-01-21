@@ -38,6 +38,56 @@
             },
             "wealth" : 30,
             "dialogue": "dialogue 3"
-        }
+        },
+        {
+            "name" : "Loïc",
+            "imageName": "char4",
+            "healthStats":
+            {
+                "heatStart" : 0,
+                "moistnessStart": 0,
+                "heatEnd": 2,
+                "moistnessEnd": -2
+            },
+            "wealth": 40,
+            "dialogue": "dialogue 4"
+        },
+        {
+            "name": "Saara",
+            "imageName": "char5",
+            "healthStats":
+            {
+                "heatStart": -4,
+                "moistnessStart": -2,
+                "heatEnd": 0,
+                "moistnessEnd": 0
+            },
+            "wealth": 40,
+            "dialogue": "dialogue 5"
+        },
+       {    "name": "Radisa",
+            "imageName": "char6",
+            "healthStats":
+            {
+                "heatStart": 0,
+                "moistnessStart": 3,
+                "heatEnd": 0,
+                "moistnessEnd": 0
+            },
+            "wealth": 40,
+            "dialogue": "dialogue 6"
+       },
+            {"name": "Sorcha",
+            "imageName": "char7",
+            "healthStats":
+            {
+                "heatStart": 2,
+                "moistnessStart": -2,
+                "heatEnd": 0,
+                "moistnessEnd": 0
+            },
+            "wealth": 40,
+            "dialogue": "dialogue 7"
+            }
     ]
 }

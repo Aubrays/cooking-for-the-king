@@ -1,6 +1,8 @@
 const level1 = {
     foods : [
-        'leek'
+        'leek',
+        'lemon',
+        'poison'
     ],
     char : 'Mélisende'
 }
@@ -8,7 +10,8 @@ const level1 = {
 const level2 = {
     foods : [
         'leek', 
-        'bread'
+        'bread',
+        'poison'
     ],
     char : 'Charles'
 }
@@ -16,10 +19,59 @@ const level3 = {
     foods:[
         'leek',
         'bread',
-        'onion',
-        'date'
+        'date',
+        'lemon',
+        'poison'
     ],
     char: 'Gunièvre'
 }
+const level4 = {
+    foods:[
+        'leek',
+        'bread',
+        'date',
+        'lemon',
+        'almond',
+        'poison'
+    ],
+    char: 'Loïc'
+}
 
-export const levels = [level1, level2, level3];
+const level5={
+    foods:[
+        'leek',
+        'bread',
+        'date',
+        'lemon',
+        'almond',
+        'poison'
+    ],
+    char: 'Saara'
+}
+const level6={
+    foods:[
+        'leek',
+        'bread',
+        'date',
+        'lemon',
+        'almond',
+        'olive',
+        'poison'
+    ],
+    char: 'Radisa'
+}
+const level7={
+    foods:[
+        'leek',
+        'bread',
+        'date',
+        'lemon',
+        'almond',
+        'olive',
+        'melon',
+        'poison'
+    ],
+    char: 'Sorcha'
+}
+
+export const levels = [level7, level1, level2, level3, level4, level5, level6, level7];

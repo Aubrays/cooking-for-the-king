@@ -92,6 +92,111 @@
 						"w": 20,
 						"h": 20
 					}
+				},
+				{
+					"filename": "lemon",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 24,
+						"h": 24
+					},
+					"spriteSourceSize":{
+						"x": 2,
+						"y": 2,
+						"w": 20,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 48,
+						"w": 21,
+						"h": 20
+					}
+				},
+				{
+					"filename": "poison",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize":{
+						"w": 20,
+						"h": 30
+					},
+					"spriteSourceSize":{
+						"x":0,
+						"y":0,
+						"w":20,
+						"h":30
+					},
+					"frame":{
+						"x":0,
+						"y": 93,
+						"w": 20,
+						"h": 30
+					}
+				},
+				{
+					"filename": "almond",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize":{
+						"w": 20,
+						"h": 20
+					},
+					"spriteSourceSize":{
+						"x":0,
+						"y":0,
+						"w":20,
+						"h":20
+					},
+					"frame":{
+						"x": 0,
+						"y": 125,
+						"w": 20,
+						"h": 20
+					}
+				},
+				{
+					"filename": "olive",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize":{
+						"w": 24,
+						"h": 24
+					},
+					"spriteSourceSize":{
+						"x": 0,
+						"y": 0,
+						"w": 20,
+						"h": 20
+					},
+					"frame":{
+						"x": 0,
+						"y": 145,
+						"w": 20,
+						"h": 20
+					}
+				},
+				{
+					"filename": "melon",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize":{
+						"w": 30,
+						"h": 30
+					},
+					"spriteSourceSize":{
+						"x": 0,
+						"y": 0,
+						"w": 30,
+						"h": 30
+					},
+					"frame":{
+						"x": 0,
+						"y": 165,
+						"w": 30,
+						"h": 30
+					}
 				}
 			]
 		}

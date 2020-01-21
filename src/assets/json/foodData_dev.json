@@ -12,15 +12,37 @@
             "moistness" : 0,
             "price" : 4
         },
-          {  "name": "onion",
-            "heat": 4,
-            "moistness": 3,
-            "price": 2
+          {  "name" : "lemon",
+            "heat" : -2,
+            "moistness" : -2,
+            "price" : 2
           },
           {  "name": "date",
+            "heat": 2,
+            "moistness": 2,
+            "price": 5
+        },
+        {   "name": "poison",
+            "heat": -9000,
+            "moistness": -9000,
+            "price": 0
+        },
+        {
+            "name": "almond",
             "heat": -2,
             "moistness": -2,
-            "price": 5
-        }
+            "price": 0
+        },
+        {  "name": "olive",
+            "heat": 0,
+            "moistness": -1,
+            "price": 0
+      },
+      {     "name": "melon",
+            "heat": -2,
+            "moistness": 3,
+            "price": 0
+
+      }
     ]
 }
