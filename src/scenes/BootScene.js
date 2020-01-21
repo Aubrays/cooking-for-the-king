@@ -54,6 +54,15 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('Loïc', 'chars/char4.png',
                                 {frameWidth:600,
                                 frameHeight:600});
+        this.load.spritesheet('Saara', 'chars/char5.png',
+                                {frameWidth:600,
+                                frameHeight:600});
+        this.load.spritesheet('Radisa', 'chars/char6.png',
+                                {frameWidth:600,
+                                frameHeight:600})
+        this.load.spritesheet('Sorcha', 'chars/char7.png',
+                                {frameWidth:600,
+                                frameHeight:600})
 
         // Sound assets
         this.load.setPath('assets/sounds/');
