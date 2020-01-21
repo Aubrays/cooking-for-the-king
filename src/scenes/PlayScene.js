@@ -239,7 +239,8 @@ export default class PlayScene extends Phaser.Scene {
 
     getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight) {
         return scene.add.text(0, 0, '', {
-                fontSize: '20px',
+                fontFamily: 'Augusta',
+                fontSize: '22px',
                 color : '#000',
                 wordWrap: {
                     width: wrapWidth
