@@ -32,6 +32,7 @@ const config = {
         }]
     },
     scene: [BootScene, MenuScene, OptionsScene, PlayScene],
+    canvas: document.querySelector('canvas')
 };
 
 let game = new Phaser.Game(config);

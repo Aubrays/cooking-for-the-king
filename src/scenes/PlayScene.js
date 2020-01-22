@@ -264,12 +264,12 @@ export default class PlayScene extends Phaser.Scene {
 
     alignFood(scene) {
         Phaser.Actions.GridAlign(scene.foods.getChildren(), {
-            width: 10,
+            width: 5,
             height: 10,
             cellWidth: 32,
-            cellHeight: 32,
+            cellHeight: 110,
             x: 70,
-            y: 520
+            y: 560
         });
     }
 
