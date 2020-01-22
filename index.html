@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <meta name="theme-color" content="#000000" />
+
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://kit.fontawesome.com/386a6b72a5.js" crossorigin="anonymous"></script>
+  
+
+
+  <title>Cooking for the king</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      min-height:800;
+      min-width:600;
+      font-size: 16px;
+    }
+    body {font-family:Arial, Helvetica, sans-serif}
+    h1,h2,h3,h4,h5,h6 {font-family: "Augusta", sans-serif}
+    .w3-row-padding img {margin-bottom: 12px}
+    /* Set the width of the sidebar to 120px */
+    .w3-sidebar {width: 120px;background: #222;}
+    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+    #main {margin-left: 120px}
+    /* Remove margins from "page content" on small screens */
+    a:hover {
+      color: white;
+    }
+    .gameName {
+      font-family: "Augusta";
+      color: white;
+      font-size: 1.25rem;
+    }
+    .authorName {
+      font-variant: small-caps;
+    }
+    @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+    canvas {
+      margin: auto;
+      display:block;
+      border: 10px solid black;
+    }
+    @font-face {
+      font-family: Augusta;
+      src: url('assets/fonts/Augusta.ttf');
+      font-weight: 400;
+      font-weight: normal;
+  }
+  </style>
+
+  <noscript>Please enable javascript to continue using this application.</noscript>
+</head>
+<body class="w3-black">
+
+  <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+    <!-- Avatar image in top left corner -->
+    <img src="assets/sprites/cfk.png" style="width:100%">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+      <i class="fa fa-crown w3-xxlarge"></i>
+      <p>LE JEU</p>
+    </a>
+    <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+      <i class="fas fa-gamepad w3-xxlarge"></i>
+      <p>A PROPOS</p>
+    </a>
+    <a href="#credits" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+      <i class="fas fa-book w3-xxlarge"></i>
+      <p>CRÉDITS</p>
+    </a>
+  </nav>
+
+  <!-- Navbar on small screens (Hidden on medium and large screens) -->
+  <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+    <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+      <a href="#" class="w3-bar-item w3-button" style="width:25% !important">LE JEU</a>
+      <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">A PROPOS</a>
+      <a href="#credits" class="w3-bar-item w3-button" style="width:25% !important">CRÉDITS</a>
+    </div>
+  </div>
+
+    <!-- Page Content -->
+  <div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
+  <header class="w3-container w3-center w3-black" id="game">
+    <h1 class="w3-jumbo">Cooking for the King</h1>
+    <section id="game">
+      <canvas></canvas>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey">A propos</h2>
+    <hr style="width:200px" class="w3-opacity">
+
+    <p>Le jeu <span class="gameName">Cooking for the King</span> présente de manière ludique la diététique médiévale. Le sujet, vaste et riche, a donc dû être simplifié et certains aspects n'ont pas été retenus afin de proposer une meilleure expérience de jeu.</p>
+
+    <p>Si les aliments étaient bel et bien classés comme nous l'avons repris des textes d'Aldebrandin de Sienne, les diagnostics sont ici fantaisistes et participent surtout au fonctionnement du jeu.</p>
+
+    <p>La première version du jeu, publiée en janvier 2020, est un projet pour le cours <a href="https://applicationspub.unil.ch/interpub/noauth/php/Ud/ficheCours.php?v_enstyid=73011&v_ueid=174&v_langue=8">Développement de jeux vidéos 2D</a> dispensé par <a href="http://isaacpante.net">Isaac Pante</a> en Section des <a href="http://unil.ch/sli">sciences du langage et de l'information</a> de l'<a href="http://unil.ch">Université de Lausanne</a>.</p>
+
+    <h3 class="w3-padding-16 w3-text-light-grey">Contributeurs</h3>
+    <ul>
+      <li><a href="http://www.aubrays.ch/">Loïc Aubrays</a></li>
+      <li><a href="https://github.com/astonedf">Saara Jones</a></li>
+      <li><a href="https://github.com/sorchawalsh">Sorcha Walsh</a></li>
+      <li><a href="https://github.com/RPetkovic">Radisa Petkovic</a></li>
+    </ul>
+  <!-- End About Section -->
+  </div>
+  
+
+  <!-- Credits Section -->
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey">Crédits</h2>
+    <hr style="width:200px" class="w3-opacity">
+    <h3>Sources et bibliographie</h3>
+    <ul>
+      <li><span class="authorName">Pibiri</span>, Eva et <span class="authorName">Chamorel</span>, Florian, Cours-séminaire <a href="https://applicationspub.unil.ch/interpub/noauth/php/Ud/ficheCours.php?v_enstyid=68721&v_ueid=174&v_langue=37">« Du jeûne aux plaisirs de la table. Boire et manger au Moyen Age »</a>, 2018-2019, Section d'histoire, Université de Lausanne.</li>
+      <li><span class="authorName">Aldebrandin de Sienne</span>, Le Régime du Corps, <span class="authorName">Landouzy</span>, Louis et <span class="authorName">Pépin</span>, Roger (éd.), Paris : Librairie ancienne Honoré Champion, 1911, LXXVIII-261 p., <a href="https://gallica.bnf.fr/ark:/12148/bpt6k6458299v">https://gallica.bnf.fr/ark:/12148/bpt6k6458299v</a></li>
+
+      <li><span class="authorName">Scully</span>, Terence, «&nbsp;Du fait de cuisine par Maistre Chiquart 1420&nbsp;», in Vallesia, 40, 1985, 261 p.</li>
+
+      <li><span class="authorName">Nicoud</span>, Marilyn, «&nbsp;Savoirs et pratiques diététiques au Moyen Âge&nbsp;», Cahiers de recherches médiévales et humanistes, no 13, 2006, p. 239-247, DOI: <a href="https://doi.org/10p. 685.4000/crm.864">10p. 685.4000/crm.864</a></li>
+      <li><span class="authorName">Laurioux</span>, Bruno, «&nbsp;Cuisine et médecine au Moyen Âge. Alliées ou ennemies&nbsp;?&nbsp;», Cahiers de recherches médiévales et humanistes, no 13, 2006, p. 223-238, DOI: <a href="https://doi.org/10.4000/crm.862">10.4000/crm.862</a></li>
+      <li><span class="authorName">Laurioux</span>, Bruno, Manger au Moyen Âge: pratiques et discours alimentaires en Europe au XIVe et XVe siècles, Paris : Hachette Littératures, 2013, 299 p.</li>
+    </ul>
+
+    <h3>Crédits</h3>
+    <ul>
+      <li>Framework: <a href="https://phaser.io/">Phaser 3</a></li>
+      <li>Template Webpack: <a href="https://github.com/yandeu/phaser-project-template-es6">Phaser project template ES6</a></li>
+      <li>Page Background: <a href="https://pixabay.com/illustrations/old-ancient-vintage-texture-352478/">Image</a> by <a href="https://pixabay.com/users/GeorgyGirl-215285">Georgiana Romanovna</a> from <a href="https://pixabay.com">Pixabay</a></li>
+      
+      <li>Game Background : <a href="https://pixabay.com/photos/tower-rotunda-candlelight-candles-3362555/">Image</a> by <a href="https://pixabay.com/users/anaterate-2348028">Wolfgang Eckert</a> from <a href="https://pixabay.com">Pixabay</a></li>
+
+      <li>Food Shelf : Image by Hekate999 for The Merrye Makers from <a href="http://modthesims.info/d/465834/the-medieval-kitchen-part-2-ye-olde-kingdom-of-pudding.html">mod the sims</a></li>
+
+      <li> Characters created with <a href="https://picrew.me/image_maker/123378" title="Picrew"> "Pixel character creator"</a></li>
+
+    </ul>
+  <!-- End Credits Section -->
+  </div>
+  
+    <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge" id="contact">
+    Donnez-nous votre avis sur le <a href="https://github.com/Aubrays/jv2d/"><i class="fab fa-github"></i>Github</a> du projet.
+  <!-- End footer -->
+  </footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+<script type="text/javascript" src="vendors.8d8a66cc023f092aecb2.bundle.js"></script><script type="text/javascript" src="main.3e15b12fec0b79268e27.bundle.js"></script></body>
+</html>
