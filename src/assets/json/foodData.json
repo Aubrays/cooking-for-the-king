@@ -17,18 +17,20 @@
 
     },
     {
-        "name" : "poisson frais",
+        "name" : "fish",
+        "nameFR" : "poisson frais",
         "heat" : 3,
         "moistness" : -3,
         "source" : "Tacuinum Sanitatis",
-        "price" : 0
+        "price" : 7
     },
     {
-        "name" : "poireau",
+        "name" : "leek",
+        "nameFR" : "poireau",
         "heat" : 3,
-        "moistness" : 0,
+        "moistness" : -2,
         "source" : "Tacuinum Sanitatis",
-        "price" : 0
+        "price" : 2
     },
     {
         "name" : "fenouil",
@@ -38,9 +40,12 @@
         "price" : 0
     },
     {
-        "name" : "oignon",
+        "name" : "onion",
+        "nameFR" : "oignon",
         "heat" : 4,
-        "moistness" : 3
+        "moistness" : 3,
+        "source" : "Tacuinum Sanitatis",
+        "price" : 2
     },
     {
         "name" : "aubergine",
@@ -67,11 +72,12 @@
         "price" : 0
     },
     {
-        "name" : "amande",
+        "name" : "almond",
+        "nameFR" : "amande",
         "heat" : 2,
         "moistness" : -2,
         "source" : "Tacuinum Sanitatis",
-        "price" : 0
+        "price" : 8
     },
     {
         "name" : "persil",
@@ -123,9 +129,12 @@
         "price" : 0
     },
     {
-        "name" : "pain",
+        "name" : "bread",
+        "nameFR" : "pain",
         "heat" : 2,
-        "moistness" : 0
+        "moistness" : 0,
+        "source" : "Tacuinum Sanitatis",
+        "price" : 2
     },
     {
         "name" : "perdrix / faisan",
@@ -143,9 +152,12 @@
         "moistness" : 1
     },
     {
-        "name" : "datte",
+        "name" : "date",
+        "nameFR" : "datte",
         "heat" : 2,
-        "moistness" : 2
+        "moistness" : 2,
+        "source" : "Tacuinum Sanitatis",
+        "price" : 10
     },
     {
         "name" : "pâtes",
@@ -253,10 +265,11 @@
     },
     {
         "name" : "olive",
+        "nameFR" : "olive",
         "heat" : 0,
         "moistness" : -1,
         "source" : "Tacuinum Sanitatis",
-        "price" : 0
+        "price" : 5
     },
     {
         "name" : "lait",
@@ -303,9 +316,12 @@
         "moistness" : 2
     },
     {
-        "name" : "porc",
+        "name" : "pork",
+        "nameFR" : "porc",
         "heat" : -1,
-        "moistness" : 1
+        "moistness" : 2,
+        "source" : "Tacuinum Sanitatis",
+        "price" : 0
     },
     {
         "name" : "gland",
@@ -315,18 +331,12 @@
         "price" : 0
     },
     {
-        "name" : "citron",
+        "name" : "lemon",
+        "nameFR" : "citron",
         "heat" : -2,
         "moistness" : -3,
         "source" : "Tacuinum Sanitatis",
-        "price" : 0
-    },
-    {
-        "name" : "datte",
-        "heat" : -2,
-        "moistness" : -2,
-        "source" : "Tacuinum Sanitatis",
-        "price" : 0
+        "price" : 15
     },
     {
         "name" : "coing",
@@ -415,8 +425,12 @@
     },
     {
         "name" : "melon",
+        "nameFR" : "melon",
         "heat" : -2,
-        "moistness" : 3
+        "moistness" : 3,
+        "source" : "Tacuinum Sanitatis",
+        "price" : 5
+
     },
     {
         "name" : "camphre",
@@ -441,7 +455,29 @@
         "name" : "eau",
         "heat" : -4,
         "moistness" : 4
+    },
+    {
+        "name" : "goose",
+        "nameFR" : "oie",
+        "heat" : 2,
+        "moistness" : 2,
+        "source" : "Tacuinum Sanitatis",
+        "price" : 12
+    },
+    {
+        "nameFR": "poison",
+        "name": "poison",
+        "heat": -9000,
+        "moistness": -9000,
+        "price": 0
+    },
+    {
+        "name" : "beef",
+        "nameFR" : "boeuf",
+        "heat" : -1,
+        "moistness" : -3,
+        "source" : "Aldebrandin de Sienne",
+        "price" : 10
     }
-
     ]
 }

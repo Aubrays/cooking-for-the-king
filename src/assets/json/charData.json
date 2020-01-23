@@ -11,7 +11,7 @@
                     "moistnessEnd" : 0
                 },
             "wealth" : 10,
-            "dialogue" : "Je suis un peu malade. Le médecin m'a dit de manger du poireau. Celui-ci est chaud et sec. Ma complexion sera alors à nouveau à l'équilibre."
+            "dialogue" : "Je suis un peu malade. Le médecin m'a prescrit de manger du poireau. Celui-ci est chaud et sec. Ma complexion sera alors à nouveau à l'équilibre."
         },
         {
             "name" : "Charles",
@@ -24,20 +24,20 @@
                     "moistnessEnd" : 1
                 },
             "wealth" : 20,
-            "dialogue": "dialogue 2"
+            "dialogue": "Ma complexion est flegmatique, très froide et très humide. Je suis bien malade. Je ne dois manger que du pain et du poireau."
         },
         {
             "name" : "Gunièvre",
             "imageName": "char3",
             "healthStats":
             {
-                "heatStart" : 2,
-                "moistnessStart" : 2,
-                "heatEnd" : -2,
-                "moistnessEnd" : -2
+                "heatStart" : -2,
+                "moistnessStart" : 0,
+                "heatEnd" : 2,
+                "moistnessEnd" : 2
             },
             "wealth" : 30,
-            "dialogue": "dialogue 3"
+            "dialogue": "Cuisinier, sers-moi de quoi retrouver ma complexion sanguine !"
         },
         {
             "name" : "Loïc",
@@ -50,7 +50,7 @@
                 "moistnessEnd": -2
             },
             "wealth": 40,
-            "dialogue": "dialogue 4"
+            "dialogue": "D'un naturel colérique ? Ca va vous coûter cher !"
         },
         {
             "name": "Saara",
@@ -63,7 +63,7 @@
                 "moistnessEnd": 0
             },
             "wealth": 40,
-            "dialogue": "dialogue 5"
+            "dialogue": "Koff ! Koff ! C'est l'automne. Je suis d'humeur mélancolique. Aide-moi !"
         },
        {    "name": "Radisa",
             "imageName": "char6",
@@ -75,7 +75,7 @@
                 "moistnessEnd": 0
             },
             "wealth": 40,
-            "dialogue": "dialogue 6"
+            "dialogue": "L'hiver approche ! J'ai besoin de retrouver un tempérament équilibré pour affronter la froide et humide saison."
        },
             {"name": "Sorcha",
             "imageName": "char7",
@@ -87,7 +87,7 @@
                 "moistnessEnd": 0
             },
             "wealth": 40,
-            "dialogue": "dialogue 7"
+            "dialogue": "As-tu de quoi évacuer ma bile jaune ?"
             }
     ]
 }

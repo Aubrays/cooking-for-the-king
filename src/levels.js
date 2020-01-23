@@ -11,6 +11,7 @@ const level2 = {
     foods : [
         'leek', 
         'bread',
+        'melon',
         'poison'
     ],
     char : 'Charles'
@@ -19,7 +20,7 @@ const level3 = {
     foods:[
         'leek',
         'bread',
-        'date',
+        'goose',
         'lemon',
         'poison'
     ],
@@ -74,4 +75,4 @@ const level7={
     char: 'Sorcha'
 }
 
-export const levels = [level7, level1, level2, level3, level4, level5, level6, level7];
+export const levels = [level1, level2, level3, level4, level5, level6, level7];

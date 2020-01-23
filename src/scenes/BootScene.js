@@ -34,7 +34,7 @@ export default class BootScene extends Phaser.Scene {
         
 
         // Atlas generated with http://free-tex-packer.com/
-        this.load.atlas('foods', 'food_dev.png', 'food_dev_atlas.json');
+        this.load.atlas('foods', 'foods.png', 'foods_atlas.json');
 
         this.load.spritesheet('cauldron', 'cauldron/cauldron_blue.png', {
             frameHeight: 339,
@@ -81,7 +81,7 @@ export default class BootScene extends Phaser.Scene {
 
 
 
-        this.load.json('foodData', 'json/foodData_dev.json');
+        this.load.json('foodData', 'json/foodData.json');
         this.load.json('charData', 'json/charData.json');
         
         

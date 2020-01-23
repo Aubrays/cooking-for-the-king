@@ -57,7 +57,6 @@ export default class PlayScene extends Phaser.Scene {
         this.openBook.setScale(0.2);
         this.close = this.add.text(140, -90, 'X', { fontFamily: 'Verdana' }).setInteractive();
         this.close.setTint(0xff0000);
-        //this.text = this.add.text(20, -70, 'Recette:', { fontFamily: 'Verdana, Tahoma, serif' });
         this.text = this.add.bitmapText(20, -80, 'augusta', 'Recette', 40, 1);
         this.text.setTint(0x000000);
         this.posY = this.text.y + 20;
@@ -182,9 +181,9 @@ export default class PlayScene extends Phaser.Scene {
     }
 
     addDialogue(context, textScene) {
-        context.createTextBox(this, 300, 150, {
-            wrapWidth: 250,
-            fixedWidth: 250,
+        context.createTextBox(this, 250, 150, {
+            wrapWidth: 300,
+            fixedWidth: 300,
             fixedHeight: 150,
         })
         .start(textScene, 100);
@@ -340,7 +339,7 @@ export default class PlayScene extends Phaser.Scene {
 
         // write in the recipe
         this.posY += 20;
-        this.recipe = this.add.text(30, this.posY, "- " + food.getData('name'));
+        this.recipe = this.add.text(30, this.posY, "- " + food.getData('nameFR'));
         this.recipe.setTint(0x000000);
         this.container.add(this.recipe);
         
