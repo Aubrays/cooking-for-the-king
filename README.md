@@ -1,13 +1,13 @@
 # A game with Phaser.js
 
+[Try the game!](https://aubrays.github.io/cooking-for-the-king/)
+
 ## Installation of the project
 
 - Clone the repository.
 - If NodeJS isn't installed, got it.
 - In a terminal : ```npm install``` to install the dev dependencies.
 - Then ```npm start``` to start the dev webserver.
-
-## Build the project
 
 To build the project, use ```npm run build```. This will create all necessary files in ```dist/```.
 
